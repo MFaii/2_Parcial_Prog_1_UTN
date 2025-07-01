@@ -7,7 +7,7 @@ from Rankings import *
 
 pygame.init()
 pygame.display.set_caption("PREGUNTADOS")
-icono = pygame.image.load("icono.png")
+icono = pygame.image.load("./imgs/icono.png")
 pygame.display.set_icon(icono)
 pantalla = pygame.display.set_mode(PANTALLA)
 datos_juego = {
@@ -38,7 +38,7 @@ while corriendo:
         porcentaje_volumen = datos_juego["volumen_musica"] / 100
 
         if bandera_musica == False:
-            pygame.mixer.music.load("musica.mp3")
+            pygame.mixer.music.load("./sounds/musica.mp3")
             pygame.mixer.music.set_volume(porcentaje_volumen)
             pygame.mixer.music.play(-1)
             bandera_musica = True
