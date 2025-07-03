@@ -1,6 +1,9 @@
 import pygame
 from Constantes import *
 from Funciones import *
+import json
+from datetime import datetime
+import os
 
 pygame.init()
 cuadro_texto = crear_elemento_juego(
@@ -21,12 +24,22 @@ def mostrar_fin_juego(
             retorno = "salir"
         elif evento.type == pygame.MOUSEBUTTONDOWN:
             # Cuando ingrese el nombre deberian haber botones que me permitan guardar los cambios
-            pass
-        elif evento.type == pygame.KEYDOWN:
-            tecla_presionada = pygame.key.name(evento.key)
-            bloc_mayus = pygame.key.get_mods()
 
-            manejar_texto(cuadro_texto, tecla_presionada, bloc_mayus, datos_juego)
+            if datos_juego["nombre"].strip() != "":
+                guardar_datos_jugador(datos_juego)
+                print("Datos guardados correctamente")
+
+        elif evento.type == pygame.KEYDOWN:
+            tecla_unicode = evento.unicode
+            tecla_nombre = pygame.key.name(evento.key)
+
+            manejar_texto(
+                cuadro_texto,
+                tecla_nombre,
+                tecla_unicode,
+                pygame.key.get_mods(),
+                datos_juego,
+            )
 
     # TODO:Metanle un fondo de pantalla al game over
 
@@ -75,4 +88,39 @@ def mostrar_fin_juego(
             "#736767",
         )
 
+    pygame.draw.rect(pantalla, (0, 200, 0), BOTON_GUARDAR)
+    mostrar_texto(
+        pantalla,
+        "Guardar partida",
+        (BOTON_GUARDAR.x + 20, BOTON_GUARDAR.y + 10),
+        FUENTE_RESPUESTA,
+        COLOR_BLANCO,
+    )
+
     return retorno
+
+
+# TODO: MOVER A FUNCIONES
+def guardar_datos_jugador(
+    datos_juego: dict, archivo: str = "./data/Partidas.json"
+) -> None:
+    guardar_datos = {
+        "nombre": datos_juego["nombre"],
+        "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "puntuacion": datos_juego["puntuacion"],
+    }
+
+    if os.path.exists(archivo):
+        with open(archivo, "r", encoding="utf-8") as f:
+            try:
+                partidas = json.load(f)
+            except json.JSONDecodeError:
+                partidas = []
+
+    else:
+        partidas = []
+
+    partidas.append(guardar_datos)
+
+    with open(archivo, "w", encoding="utf-8") as f:
+        json.dump(partidas, f, indent=4, ensure_ascii=False)
