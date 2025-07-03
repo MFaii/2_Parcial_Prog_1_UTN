@@ -71,47 +71,27 @@ def limpiar_superficie(
     )
 
 
-def obtener_respuesta_click(
-    boton_respuesta_uno: dict,
-    boton_respuesta_dos: dict,
-    boton_respuesta_tres: dict,
-    pos_click: tuple,
-):
-    lista_aux = [
-        boton_respuesta_uno["rectangulo"],
-        boton_respuesta_dos["rectangulo"],
-        boton_respuesta_tres["rectangulo"],
-    ]
+def obtener_respuesta_click(lista_respuestas: list, pos_click: tuple):
     respuesta = None
 
-    for i in range(len(lista_aux)):
-        if lista_aux[i].collidepoint(pos_click):
+    for i in range(len(lista_respuestas)):
+        if lista_respuestas[i]["rectangulo"].collidepoint(pos_click):
             respuesta = i + 1
 
     return respuesta
 
 
 def cambiar_pregunta(
-    lista_preguntas: list,
-    indice: int,
-    caja_pregunta: dict,
-    boton_respuesta_uno: dict,
-    boton_respuesta_dos: dict,
-    boton_respuesta_tres: dict,
+    lista_preguntas: list, indice: int, caja_pregunta: dict, lista_respuestas: list
 ) -> dict:
     pregunta_actual = lista_preguntas[indice]
     limpiar_superficie(
         caja_pregunta, "./imgs/textura_pregunta.jpg", ANCHO_PREGUNTA, ALTO_PREGUNTA
     )
-    limpiar_superficie(
-        boton_respuesta_uno, "./imgs/textura_respuesta.jpg", ANCHO_BOTON, ALTO_BOTON
-    )
-    limpiar_superficie(
-        boton_respuesta_dos, "./imgs/textura_respuesta.jpg", ANCHO_BOTON, ALTO_BOTON
-    )
-    limpiar_superficie(
-        boton_respuesta_tres, "./imgs/textura_respuesta.jpg", ANCHO_BOTON, ALTO_BOTON
-    )
+    for i in range(len(lista_respuestas)):
+        limpiar_superficie(
+            lista_respuestas[i], "./imgs/textura_respuesta.jpg", ANCHO_BOTON, ALTO_BOTON
+        )
 
     return pregunta_actual
 
@@ -128,3 +108,48 @@ def crear_botones_menu() -> list:
         lista_botones.append(boton)
 
     return lista_botones
+
+
+def crear_respuestas(
+    textura: str,
+    ancho: int,
+    alto: int,
+    pos_x: int,
+    pos_y: int,
+    cantidad_respuestas: int,
+) -> list:
+    lista_respuestas = []
+
+    for i in range(cantidad_respuestas):
+        boton_respuesta = crear_elemento_juego(textura, ancho, alto, pos_x, pos_y)
+        lista_respuestas.append(boton_respuesta)
+        pos_y += 80
+
+    return lista_respuestas
+
+
+def manejar_texto(
+    cuadro_texto: dict, tecla_presionada: str, bloc_mayus: int, datos_juego: dict
+) -> None:
+    # Cuando se toca un espacio
+    if tecla_presionada == "space":
+        CLICK_SONIDO.play()
+        datos_juego["nombre"] += " "
+
+    # Cuando se toca el boton borrar
+    if tecla_presionada == "backspace" and len(datos_juego["nombre"]) > 0:
+        datos_juego["nombre"] = datos_juego["nombre"][
+            0 : len(datos_juego["nombre"]) - 1
+        ]
+        limpiar_superficie(
+            cuadro_texto, "./imgs/textura_respuesta.jpg", ANCHO_CUADRO, ALTO_CUADRO
+        )
+
+    # Cuando se toca un caracter
+    if len(tecla_presionada) == 1:
+        CLICK_SONIDO.play()
+        # ESTA ACTIVO EL BLOC MAYUSCULA
+        if bloc_mayus == 8192 or bloc_mayus == 1 or bloc_mayus == 2:
+            datos_juego["nombre"] += tecla_presionada.upper()
+        else:
+            datos_juego["nombre"] += tecla_presionada
