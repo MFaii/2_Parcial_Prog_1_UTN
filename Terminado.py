@@ -28,8 +28,14 @@ def mostrar_fin_juego(
 
             manejar_texto(cuadro_texto, tecla_presionada, bloc_mayus, datos_juego)
 
-    # Metanle un fondo de pantalla al game over
-    pantalla.fill(COLOR_BLANCO)
+    # TODO:Metanle un fondo de pantalla al game over
+
+    fondo_pantalla = pygame.transform.scale(
+        pygame.image.load("./imgs/fondo.jpg"), PANTALLA
+    )
+    pantalla.blit(fondo_pantalla, (0, 0))
+
+    # pantalla.fill(COLOR_BLANCO)
     pantalla.blit(cuadro_texto["superficie"], cuadro_texto["rectangulo"])
     mostrar_texto(
         pantalla,
