@@ -22,14 +22,8 @@ fondo_pantalla = pygame.transform.scale(pygame.image.load("./imgs/fondo.jpg"), P
 caja_pregunta = crear_elemento_juego(
     "./imgs/textura_pregunta.jpg", ANCHO_PREGUNTA, ALTO_PREGUNTA, 80, 80
 )
-boton_respuesta_uno = crear_elemento_juego(
-    "./imgs/textura_respuesta.jpg", ANCHO_BOTON, ALTO_BOTON, 125, 245
-)
-boton_respuesta_dos = crear_elemento_juego(
-    "./imgs/textura_respuesta.jpg", ANCHO_BOTON, ALTO_BOTON, 125, 315
-)
-boton_respuesta_tres = crear_elemento_juego(
-    "./imgs/textura_respuesta.jpg", ANCHO_BOTON, ALTO_BOTON, 125, 385
+lista_respuestas = crear_respuestas(
+    "./imgs/textura_respuesta.jpg", ANCHO_BOTON, ALTO_BOTON, 125, 245, 3
 )
 
 mezclar_lista(lista_preguntas)
@@ -47,19 +41,14 @@ def mostrar_juego(
     pregunta_actual = lista_preguntas[datos_juego["indice"]]
 
     if datos_juego["vidas"] == 0 or datos_juego["tiempo_restante"] == 0:
-        retorno = "menu"
+        retorno = "terminado"
 
     for evento in cola_eventos:
         if evento.type == pygame.QUIT:
             retorno = "salir"
         elif evento.type == pygame.MOUSEBUTTONDOWN:
             if evento.button == 1:
-                respuesta = obtener_respuesta_click(
-                    boton_respuesta_uno,
-                    boton_respuesta_dos,
-                    boton_respuesta_tres,
-                    evento.pos,
-                )
+                respuesta = obtener_respuesta_click(lista_respuestas, evento.pos)
                 if respuesta != None:
                     if (
                         verificar_respuesta(datos_juego, pregunta_actual, respuesta)
@@ -78,9 +67,7 @@ def mostrar_juego(
                         lista_preguntas,
                         datos_juego["indice"],
                         caja_pregunta,
-                        boton_respuesta_uno,
-                        boton_respuesta_dos,
-                        boton_respuesta_tres,
+                        lista_respuestas,
                     )
 
         elif evento.type == evento_tiempo:
@@ -88,11 +75,12 @@ def mostrar_juego(
 
     pantalla.blit(fondo_pantalla, (0, 0))
     pantalla.blit(caja_pregunta["superficie"], caja_pregunta["rectangulo"])
-    pantalla.blit(boton_respuesta_uno["superficie"], boton_respuesta_uno["rectangulo"])
-    pantalla.blit(boton_respuesta_dos["superficie"], boton_respuesta_dos["rectangulo"])
-    pantalla.blit(
-        boton_respuesta_tres["superficie"], boton_respuesta_tres["rectangulo"]
-    )
+
+    for i in range(len(lista_respuestas)):
+        pantalla.blit(
+            lista_respuestas[i]["superficie"], lista_respuestas[i]["rectangulo"]
+        )
+        # mostrar_texto(lista_respuestas[i]["superficie"],pregunta_actual[f"respuesta_{i + 1}"],(20,20),FUENTE_RESPUESTA,COLOR_BLANCO)
 
     mostrar_texto(
         caja_pregunta["superficie"],
@@ -101,22 +89,23 @@ def mostrar_juego(
         FUENTE_PREGUNTA,
         COLOR_NEGRO,
     )
+
     mostrar_texto(
-        boton_respuesta_uno["superficie"],
+        lista_respuestas[0]["superficie"],
         pregunta_actual["respuesta_1"],
         (20, 20),
         FUENTE_RESPUESTA,
         COLOR_BLANCO,
     )
     mostrar_texto(
-        boton_respuesta_dos["superficie"],
+        lista_respuestas[1]["superficie"],
         pregunta_actual["respuesta_2"],
         (20, 20),
         FUENTE_RESPUESTA,
         COLOR_BLANCO,
     )
     mostrar_texto(
-        boton_respuesta_tres["superficie"],
+        lista_respuestas[2]["superficie"],
         pregunta_actual["respuesta_3"],
         (20, 20),
         FUENTE_RESPUESTA,
