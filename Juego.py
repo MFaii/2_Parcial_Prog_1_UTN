@@ -1,6 +1,7 @@
 import pygame
 from Constantes import *
 from Preguntas import *
+from Preguntas import *
 from Funciones import *
 
 pygame.init()
@@ -17,6 +18,8 @@ datos_juego = {
     "tiempo_restante": 30,
 }
 fondo_pantalla = pygame.transform.scale(pygame.image.load("./imgs/fondo.jpg"), PANTALLA)
+
+lista_preguntas = cargar_preguntas_csv()
 
 # Elemento del juego
 caja_pregunta = crear_elemento_juego(
