@@ -4,6 +4,7 @@ from Menu import *
 from Juego import *
 from Configuracion import *
 from Rankings import *
+from Terminado import *
 
 pygame.init()
 pygame.display.set_caption("PREGUNTADOS")
@@ -14,15 +15,17 @@ datos_juego = {
     "puntuacion": 0,
     "vidas": CANTIDAD_VIDAS,
     "nombre": "",
-    "tiempo_restante": 30,
+    "tiempo_restante": CANTIDAD_TIEMPO,
     "indice": 0,
-    "volumen_musica": 100,
+    "volumen_musica": 0,
 }
 corriendo = True
 reloj = pygame.time.Clock()
 bandera_musica = False
-
 ventana_actual = "menu"
+
+# Ustedes la van a cargar del json
+lista_rankings = []
 
 while corriendo:
     reloj.tick(FPS)
@@ -49,9 +52,13 @@ while corriendo:
     elif ventana_actual == "ajustes":
         ventana_actual = mostrar_ajustes(pantalla, cola_eventos, datos_juego)
     elif ventana_actual == "rankings":
-        ventana_actual = mostrar_rankings(pantalla, cola_eventos, datos_juego)
+        ventana_actual = mostrar_rankings(pantalla, cola_eventos, lista_rankings)
+    elif ventana_actual == "terminado":
+        ventana_actual = mostrar_fin_juego(
+            pantalla, cola_eventos, datos_juego, lista_rankings
+        )
 
-    print(ventana_actual)
+    # print(ventana_actual)
     pygame.display.flip()
 
 pygame.quit()
