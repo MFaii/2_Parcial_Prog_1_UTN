@@ -26,6 +26,7 @@ ventana_actual = "menu"
 
 # Ustedes la van a cargar del json
 lista_rankings = []
+ya_guardado = {"guardado": False}
 
 while corriendo:
     reloj.tick(FPS)
@@ -36,6 +37,8 @@ while corriendo:
             pygame.mixer.music.stop()
             bandera_musica = False
         reiniciar_estadisticas(datos_juego)
+        # SOLO SI HACEMOS QUE SE REINICIE SOLO
+        # ya_guardado["guardado"] = False
         ventana_actual = mostrar_menu(pantalla, cola_eventos)
     elif ventana_actual == "juego":
         porcentaje_volumen = datos_juego["volumen_musica"] / 100
@@ -52,10 +55,11 @@ while corriendo:
     elif ventana_actual == "ajustes":
         ventana_actual = mostrar_ajustes(pantalla, cola_eventos, datos_juego)
     elif ventana_actual == "rankings":
+        lista_rankings = cargar_top_jugadores()
         ventana_actual = mostrar_rankings(pantalla, cola_eventos, lista_rankings)
     elif ventana_actual == "terminado":
         ventana_actual = mostrar_fin_juego(
-            pantalla, cola_eventos, datos_juego, lista_rankings
+            pantalla, cola_eventos, datos_juego, lista_rankings, ya_guardado
         )
 
     # print(ventana_actual)

@@ -1,0 +1,57 @@
+[
+    {
+        "nombre": "maxi",
+        "fecha": "2025-07-03 03:49:07",
+        "puntuacion": 75
+    },
+    {
+        "nombre": "jose",
+        "fecha": "2025-07-03 03:49:31",
+        "puntuacion": 275
+    },
+    {
+        "nombre": "Maxi",
+        "fecha": "2025-07-03 04:05:45",
+        "puntuacion": 75
+    },
+    {
+        "nombre": "Maxi Test",
+        "fecha": "2025-07-04 21:57:46",
+        "puntuacion": 75
+    },
+    {
+        "nombre": "Maxi Test 2",
+        "fecha": "2025-07-04 22:00:25",
+        "puntuacion": 75
+    },
+    {
+        "nombre": "Test nombre valido 1",
+        "fecha": "2025-07-04 22:10:15",
+        "puntuacion": 275
+    },
+    {
+        "nombre": "Maxi Final",
+        "fecha": "2025-07-04 22:11:27",
+        "puntuacion": 375
+    },
+    {
+        "nombre": "Error fix",
+        "fecha": "2025-07-04 22:17:01",
+        "puntuacion": 75
+    },
+    {
+        "nombre": "Jose",
+        "fecha": "2025-07-05 01:12:55",
+        "puntuacion": 275
+    },
+    {
+        "nombre": "Ricardo",
+        "fecha": "2025-07-05 01:35:45",
+        "puntuacion": 275
+    },
+    {
+        "nombre": "Pasar comodin Test",
+        "fecha": "2025-07-05 05:23:48",
+        "puntuacion": 500
+    }
+]

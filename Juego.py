@@ -16,6 +16,7 @@ datos_juego = {
     "vidas": CANTIDAD_VIDAS,
     "nombre": "",
     "tiempo_restante": 30,
+    "comodin_pasar_usado": False,
 }
 fondo_pantalla = pygame.transform.scale(pygame.image.load("./imgs/fondo.jpg"), PANTALLA)
 
@@ -51,27 +52,34 @@ def mostrar_juego(
             retorno = "salir"
         elif evento.type == pygame.MOUSEBUTTONDOWN:
             if evento.button == 1:
-                respuesta = obtener_respuesta_click(lista_respuestas, evento.pos)
-                if respuesta != None:
-                    if (
-                        verificar_respuesta(datos_juego, pregunta_actual, respuesta)
-                        == True
-                    ):
-                        # Recomiendo sonido de respuesta correcta
-                        CLICK_SONIDO.play()
-                    else:
-                        ERROR_SONIDO.play()
-                    datos_juego["indice"] += 1
-                    if datos_juego["indice"] == len(lista_preguntas):
-                        mezclar_lista(lista_preguntas)
-                        datos_juego["indice"] = 0
-
+                if BOTON_COMODIN.collidepoint(evento.pos):
+                    aplicar_comodin("pasar", datos_juego, lista_preguntas)
                     pregunta_actual = cambiar_pregunta(
                         lista_preguntas,
                         datos_juego["indice"],
                         caja_pregunta,
                         lista_respuestas,
                     )
+                    CLICK_SONIDO.play()
+
+                else:
+                    respuesta = obtener_respuesta_click(lista_respuestas, evento.pos)
+                    if respuesta is not None:
+                        if verificar_respuesta(datos_juego, pregunta_actual, respuesta):
+                            CLICK_SONIDO.play()
+                        else:
+                            ERROR_SONIDO.play()
+                        datos_juego["indice"] += 1
+                        if datos_juego["indice"] == len(lista_preguntas):
+                            mezclar_lista(lista_preguntas)
+                            datos_juego["indice"] = 0
+
+                        pregunta_actual = cambiar_pregunta(
+                            lista_preguntas,
+                            datos_juego["indice"],
+                            caja_pregunta,
+                            lista_respuestas,
+                        )
 
         elif evento.type == evento_tiempo:
             datos_juego["tiempo_restante"] -= 1
@@ -111,6 +119,15 @@ def mostrar_juego(
         lista_respuestas[2]["superficie"],
         pregunta_actual["respuesta_3"],
         (20, 20),
+        FUENTE_RESPUESTA,
+        COLOR_BLANCO,
+    )
+
+    pygame.draw.rect(pantalla, (50, 150, 255), BOTON_COMODIN)
+    mostrar_texto(
+        pantalla,
+        "Pasar pregunta",
+        (BOTON_COMODIN.x + 20, BOTON_COMODIN.y + 10),
         FUENTE_RESPUESTA,
         COLOR_BLANCO,
     )

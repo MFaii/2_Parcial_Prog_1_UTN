@@ -1,6 +1,9 @@
 import random
 from Constantes import *
 import pygame
+import json
+from datetime import datetime
+import os
 
 
 def mostrar_texto(surface, text, pos, font, color=pygame.Color("black")):
@@ -129,27 +132,81 @@ def crear_respuestas(
 
 
 def manejar_texto(
-    cuadro_texto: dict, tecla_presionada: str, bloc_mayus: int, datos_juego: dict
+    cuadro_texto: dict,
+    tecla_nombre: str,
+    tecla_unicode: str,
+    bloc_mayus: int,
+    datos_juego: dict,
 ) -> None:
-    # Cuando se toca un espacio
-    if tecla_presionada == "space":
+    # 1. Si se presiona la barra espaciadora
+    if tecla_nombre == "space":
         CLICK_SONIDO.play()
         datos_juego["nombre"] += " "
 
-    # Cuando se toca el boton borrar
-    if tecla_presionada == "backspace" and len(datos_juego["nombre"]) > 0:
-        datos_juego["nombre"] = datos_juego["nombre"][
-            0 : len(datos_juego["nombre"]) - 1
-        ]
+    # 2. Si se presiona la tecla borrar (backspace) y hay texto para borrar
+    elif tecla_nombre == "backspace" and len(datos_juego["nombre"]) > 0:
+        datos_juego["nombre"] = datos_juego["nombre"][:-1]
         limpiar_superficie(
             cuadro_texto, "./imgs/textura_respuesta.jpg", ANCHO_CUADRO, ALTO_CUADRO
         )
 
-    # Cuando se toca un caracter
-    if len(tecla_presionada) == 1:
+    # 3. Si se presiona una letra, número o símbolo imprimible
+    elif len(tecla_unicode) == 1 and tecla_unicode.isprintable():
         CLICK_SONIDO.play()
-        # ESTA ACTIVO EL BLOC MAYUSCULA
-        if bloc_mayus == 8192 or bloc_mayus == 1 or bloc_mayus == 2:
-            datos_juego["nombre"] += tecla_presionada.upper()
+
+        # Si está activo Shift o Caps Lock, lo escribo en mayúscula
+        if bloc_mayus & (pygame.KMOD_SHIFT | pygame.KMOD_CAPS):
+            datos_juego["nombre"] += tecla_unicode.upper()
         else:
-            datos_juego["nombre"] += tecla_presionada
+            datos_juego["nombre"] += tecla_unicode
+
+
+def guardar_datos_jugador(
+    datos_juego: dict, archivo: str = "./data/Partidas.json"
+) -> None:
+    guardar_datos = {
+        "nombre": datos_juego["nombre"],
+        "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "puntuacion": datos_juego["puntuacion"],
+    }
+
+    if os.path.exists(archivo):
+        with open(archivo, "r", encoding="utf-8") as f:
+            try:
+                partidas = json.load(f)
+            except json.JSONDecodeError:
+                partidas = []
+
+    else:
+        partidas = []
+
+    partidas.append(guardar_datos)
+
+    with open(archivo, "w", encoding="utf-8") as f:
+        json.dump(partidas, f, indent=4, ensure_ascii=False)
+
+
+def cargar_top_jugadores(archivo="./data/Partidas.json") -> list:
+    if not os.path.exists(archivo):
+        return []
+
+    with open(archivo, "r", encoding="utf-8") as f:
+        try:
+            partidas = json.load(f)
+        except json.JSONDecodeError:
+            return []
+
+    top_10 = sorted(partidas, key=lambda p: p["puntuacion"], reverse=True)[:10]
+    return top_10
+
+
+def aplicar_comodin(comodin: str, datos_juego: dict, lista_preguntas: list) -> bool:
+    if comodin == "pasar":
+        if not datos_juego.get("comodin_pasar_usado", False):
+            datos_juego["indice"] += 1
+            if datos_juego["indice"] >= len(lista_preguntas):
+                mezclar_lista(lista_preguntas)
+                datos_juego["indice"] = 0
+            datos_juego["comodin_pasar_usado"] = True
+            return True
+    return False
