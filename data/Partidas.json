@@ -48,5 +48,10 @@
         "nombre": "Ricardo",
         "fecha": "2025-07-05 01:35:45",
         "puntuacion": 275
+    },
+    {
+        "nombre": "Pasar comodin Test",
+        "fecha": "2025-07-05 05:23:48",
+        "puntuacion": 500
     }
 ]

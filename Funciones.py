@@ -198,3 +198,15 @@ def cargar_top_jugadores(archivo="./data/Partidas.json") -> list:
 
     top_10 = sorted(partidas, key=lambda p: p["puntuacion"], reverse=True)[:10]
     return top_10
+
+
+def aplicar_comodin(comodin: str, datos_juego: dict, lista_preguntas: list) -> bool:
+    if comodin == "pasar":
+        if not datos_juego.get("comodin_pasar_usado", False):
+            datos_juego["indice"] += 1
+            if datos_juego["indice"] >= len(lista_preguntas):
+                mezclar_lista(lista_preguntas)
+                datos_juego["indice"] = 0
+            datos_juego["comodin_pasar_usado"] = True
+            return True
+    return False
