@@ -38,5 +38,15 @@
         "nombre": "Error fix",
         "fecha": "2025-07-04 22:17:01",
         "puntuacion": 75
+    },
+    {
+        "nombre": "Jose",
+        "fecha": "2025-07-05 01:12:55",
+        "puntuacion": 275
+    },
+    {
+        "nombre": "Ricardo",
+        "fecha": "2025-07-05 01:35:45",
+        "puntuacion": 275
     }
 ]

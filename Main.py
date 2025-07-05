@@ -55,6 +55,7 @@ while corriendo:
     elif ventana_actual == "ajustes":
         ventana_actual = mostrar_ajustes(pantalla, cola_eventos, datos_juego)
     elif ventana_actual == "rankings":
+        lista_rankings = cargar_top_jugadores()
         ventana_actual = mostrar_rankings(pantalla, cola_eventos, lista_rankings)
     elif ventana_actual == "terminado":
         ventana_actual = mostrar_fin_juego(

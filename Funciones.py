@@ -184,3 +184,17 @@ def guardar_datos_jugador(
 
     with open(archivo, "w", encoding="utf-8") as f:
         json.dump(partidas, f, indent=4, ensure_ascii=False)
+
+
+def cargar_top_jugadores(archivo="./data/Partidas.json") -> list:
+    if not os.path.exists(archivo):
+        return []
+
+    with open(archivo, "r", encoding="utf-8") as f:
+        try:
+            partidas = json.load(f)
+        except json.JSONDecodeError:
+            return []
+
+    top_10 = sorted(partidas, key=lambda p: p["puntuacion"], reverse=True)[:10]
+    return top_10
