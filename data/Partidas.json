@@ -13,5 +13,25 @@
         "nombre": "Maxi",
         "fecha": "2025-07-03 04:05:45",
         "puntuacion": 75
+    },
+    {
+        "nombre": "Maxi Test",
+        "fecha": "2025-07-04 21:57:46",
+        "puntuacion": 75
+    },
+    {
+        "nombre": "Maxi Test 2",
+        "fecha": "2025-07-04 22:00:25",
+        "puntuacion": 75
+    },
+    {
+        "nombre": "Test nombre valido 1",
+        "fecha": "2025-07-04 22:10:15",
+        "puntuacion": 275
+    },
+    {
+        "nombre": "Maxi Final",
+        "fecha": "2025-07-04 22:11:27",
+        "puntuacion": 375
     }
 ]

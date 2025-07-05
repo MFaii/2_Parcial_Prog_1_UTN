@@ -4,6 +4,7 @@ from Funciones import *
 import json
 from datetime import datetime
 import os
+from Validaciones import *
 
 pygame.init()
 cuadro_texto = crear_elemento_juego(
@@ -16,6 +17,7 @@ def mostrar_fin_juego(
     cola_eventos: list[pygame.event.Event],
     datos_juego: dict,
     lista_rankings: list,
+    ya_guardado: dict,
 ) -> str:
     retorno = "terminado"
 
@@ -25,9 +27,19 @@ def mostrar_fin_juego(
         elif evento.type == pygame.MOUSEBUTTONDOWN:
             # Cuando ingrese el nombre deberian haber botones que me permitan guardar los cambios
 
-            if datos_juego["nombre"].strip() != "":
-                guardar_datos_jugador(datos_juego)
-                print("Datos guardados correctamente")
+            if BOTON_GUARDAR.collidepoint(evento.pos):
+                nombre_ingresado = datos_juego["nombre"].strip()
+
+                if not nombre_valido(nombre_ingresado):
+                    print("Ingresá un nombre válido (letras, espacios, números).")
+
+                elif not ya_guardado["guardado"]:
+                    guardar_datos_jugador(datos_juego)
+                    ya_guardado["guardado"] = True
+                    print("Datos guardados correctamente")
+
+                else:
+                    print("Ya guardaste la partida")
 
         elif evento.type == pygame.KEYDOWN:
             tecla_unicode = evento.unicode

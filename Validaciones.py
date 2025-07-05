@@ -1,25 +1,19 @@
-def es_letra_o_espacio(caracter: str) -> None:
-    return ("A" <= caracter <= "Z") or ("a" <= caracter <= "z") or caracter == " "
+import re
 
 
 def nombre_valido(nombre: str) -> bool:
-    contador_letras = 0
-    valido = True
+    nombre = nombre.strip()
 
-    i = 0
+    if len(nombre) < 1:
+        return False
 
-    while i < len(nombre):
-        letra = nombre[i]
+    # isalpha devuelve true para letras
+    if not any(c.isalpha() for c in nombre):
+        return False
 
-        if letra != " ":
-            contador_letras += 1
+    # Solo letras, espacios y opcionalmente números (ajustable)
+    patron = r"^[A-Za-zÁÉÍÓÚáéíóúÑñÜü0-9 ]+$"
+    if not re.match(patron, nombre):
+        return False
 
-        if not es_letra_o_espacio(letra):
-            valido = False
-
-        i += 1
-
-    if contador_letras < 3:
-        valido = False
-
-    return valido
+    return True
