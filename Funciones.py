@@ -1,6 +1,9 @@
 import random
 from Constantes import *
 import pygame
+import json
+from datetime import datetime
+import os
 
 
 def mostrar_texto(surface, text, pos, font, color=pygame.Color("black")):
@@ -156,3 +159,28 @@ def manejar_texto(
             datos_juego["nombre"] += tecla_unicode.upper()
         else:
             datos_juego["nombre"] += tecla_unicode
+
+
+def guardar_datos_jugador(
+    datos_juego: dict, archivo: str = "./data/Partidas.json"
+) -> None:
+    guardar_datos = {
+        "nombre": datos_juego["nombre"],
+        "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "puntuacion": datos_juego["puntuacion"],
+    }
+
+    if os.path.exists(archivo):
+        with open(archivo, "r", encoding="utf-8") as f:
+            try:
+                partidas = json.load(f)
+            except json.JSONDecodeError:
+                partidas = []
+
+    else:
+        partidas = []
+
+    partidas.append(guardar_datos)
+
+    with open(archivo, "w", encoding="utf-8") as f:
+        json.dump(partidas, f, indent=4, ensure_ascii=False)

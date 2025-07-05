@@ -110,29 +110,3 @@ def mostrar_fin_juego(
     )
 
     return retorno
-
-
-# TODO: MOVER A FUNCIONES
-def guardar_datos_jugador(
-    datos_juego: dict, archivo: str = "./data/Partidas.json"
-) -> None:
-    guardar_datos = {
-        "nombre": datos_juego["nombre"],
-        "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "puntuacion": datos_juego["puntuacion"],
-    }
-
-    if os.path.exists(archivo):
-        with open(archivo, "r", encoding="utf-8") as f:
-            try:
-                partidas = json.load(f)
-            except json.JSONDecodeError:
-                partidas = []
-
-    else:
-        partidas = []
-
-    partidas.append(guardar_datos)
-
-    with open(archivo, "w", encoding="utf-8") as f:
-        json.dump(partidas, f, indent=4, ensure_ascii=False)
