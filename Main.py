@@ -18,7 +18,8 @@ datos_juego = {
     "nombre": "",
     "tiempo_restante": CANTIDAD_TIEMPO,
     "indice": 0,
-    "volumen_musica": 0,
+    "volumen_musica": 5,
+    "volumen_anterior": 50,
 }
 corriendo = True
 reloj = pygame.time.Clock()
