@@ -20,6 +20,10 @@ datos_juego = {
     "indice": 0,
     "volumen_musica": 5,
     "volumen_anterior": 50,
+    # Comodines
+    "comodin_pasar_usado": False,
+    "comodin_doble_usado": False,
+    "x2_activado": False,
 }
 corriendo = True
 reloj = pygame.time.Clock()

@@ -24,7 +24,7 @@ caja_pregunta = crear_elemento_juego(
     ANCHO_PREGUNTA,
     ALTO_PREGUNTA,
     (600 - ANCHO_PREGUNTA) // 2,  # Centrado horizontal
-    80
+    80,
 )
 
 lista_respuestas = crear_respuestas(
@@ -33,7 +33,7 @@ lista_respuestas = crear_respuestas(
     ALTO_BOTON,
     (600 - ANCHO_BOTON) // 2,  # Centrado horizontal
     245,  # Primer respuesta
-    4     # Cantidad de respuestas
+    4,  # Cantidad de respuestas
 )
 
 BOTON_COMODIN = pygame.Rect(450, 550, 140, 40)  # Esquina inferior derecha
@@ -44,6 +44,7 @@ pygame.time.set_timer(evento_tiempo, 1000)
 # -------------------------------
 # FUNCION PRINCIPAL DEL JUEGO
 # -------------------------------
+
 
 def mostrar_juego(
     pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict
@@ -68,10 +69,20 @@ def mostrar_juego(
                             lista_respuestas,
                         )
                         CLICK_SONIDO.play()
+
+                elif BOTON_X2.collidepoint(evento.pos):
+                    if aplicar_comodin("x2", datos_juego, lista_preguntas):
+                        CLICK_SONIDO.play()
+
                 else:
                     respuesta = obtener_respuesta_click(lista_respuestas, evento.pos)
                     if respuesta is not None:
-                        if verificar_respuesta(datos_juego, pregunta_actual, respuesta):
+                        es_correcta = verificar_respuesta(
+                            datos_juego, pregunta_actual, respuesta
+                        )
+                        calcular_puntos(datos_juego, es_correcta)
+
+                        if es_correcta:
                             CLICK_SONIDO.play()
                         else:
                             ERROR_SONIDO.play()
@@ -120,6 +131,15 @@ def mostrar_juego(
         pantalla,
         "Pasar pregunta",
         (BOTON_COMODIN.x + 10, BOTON_COMODIN.y + 10),
+        FUENTE_CAMBIO_PREGUNTA,
+        COLOR_BLANCO,
+    )
+
+    pygame.draw.rect(pantalla, (255, 165, 0), BOTON_X2)
+    mostrar_texto(
+        pantalla,
+        "X2 puntos",
+        (BOTON_X2.x + 10, BOTON_X2.y + 10),
         FUENTE_CAMBIO_PREGUNTA,
         COLOR_BLANCO,
     )

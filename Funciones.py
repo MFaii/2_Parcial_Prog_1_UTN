@@ -37,28 +37,14 @@ def reiniciar_estadisticas(datos_juego: dict) -> None:
     datos_juego["vidas"] = CANTIDAD_VIDAS
     datos_juego["nombre"] = ""
     datos_juego["tiempo_restante"] = 30
+    datos_juego["comodin_pasar_usado"] = False
+    datos_juego["comodin_doble_usado"] = False
+    datos_juego["x2_activado"] = False
 
 
 # GENERAL
 def verificar_respuesta(datos_juego: dict, pregunta: dict, respuesta: int) -> bool:
-    if respuesta == pregunta["respuesta_correcta"]:
-        datos_juego["puntuacion"] += PUNTUACION_ACIERTO
-        datos_juego["aciertos_consecutivos"] += 1
-
-        # Gana una vida cada 5 aciertos correctos
-        if datos_juego["aciertos_consecutivos"] == 5:
-            datos_juego["vidas"] += 1
-            datos_juego["aciertos_consecutivos"] = 0
-
-        retorno = True
-    else:
-        datos_juego["vidas"] -= 1
-        datos_juego["puntuacion"] -= PUNTUACION_ERROR
-        datos_juego["aciertos_consecutivos"] = 0  # Se reinicia si se equivoca
-        retorno = False
-
-    return retorno
-
+    return respuesta == pregunta["respuesta_correcta"]
 
 
 def crear_elemento_juego(
@@ -113,8 +99,8 @@ def crear_botones_menu() -> list:
     cantidad_botones = 4
     espacio = 20
     altura_total = cantidad_botones * ALTO_BOTON + (cantidad_botones - 1) * espacio
-    pos_y = (600 - altura_total) // 2  
-    pos_x = (600 - ANCHO_BOTON) // 2  
+    pos_y = (600 - altura_total) // 2
+    pos_x = (600 - ANCHO_BOTON) // 2
 
     for i in range(cantidad_botones):
         boton = crear_elemento_juego(
@@ -124,7 +110,6 @@ def crear_botones_menu() -> list:
         pos_y += ALTO_BOTON + espacio
 
     return lista_botones
-
 
 
 def crear_respuestas(
@@ -223,4 +208,21 @@ def aplicar_comodin(comodin: str, datos_juego: dict, lista_preguntas: list) -> b
                 datos_juego["indice"] = 0
             datos_juego["comodin_pasar_usado"] = True
             return True
+
+    elif comodin == "x2":
+        if not datos_juego.get("comodin_doble_usado", False):
+            datos_juego["x2_activado"] = True
+            datos_juego["comodin_doble_usado"] = True
+            return True
     return False
+
+
+def calcular_puntos(datos_juego: dict, es_correcta: bool) -> None:
+    if es_correcta:
+        puntos = PUNTUACION_ACIERTO
+        if datos_juego.get("x2_activado", False):
+            puntos *= 2
+            datos_juego["x2_activado"] = False
+        datos_juego["puntuacion"] += puntos
+    else:
+        datos_juego["puntuacion"] -= PUNTUACION_ERROR
