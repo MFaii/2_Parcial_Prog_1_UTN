@@ -1,11 +1,11 @@
-pregunta,respuesta_1,respuesta_2,respuesta_3,respuesta_correcta
-¿En qué ciudad nació Lionel Messi?,Rosario,Buenos Aires,Córdoba,1
-¿Cuál es la capital de Argentina?,Buenos Aires,Córdoba,Rosario,1
-¿En qué año ganó Argentina su primer mundial de fútbol?,1978,1986,2002,1
-¿Quién es conocido como el 'Padre de la Patria' en Argentina?,Juan Manuel de Rosas,José de San Martín,Manuel Belgrano,2
-¿Cuál es el pico más alto de Argentina?,Cerro Aconcagua,Cerro Tronador,Cerro Fitz Roy,1
-¿Qué río separa a Argentina de Uruguay?,Río Paraná,Río Colorado,Río de la Plata,3
-¿Quién compuso la canción 'Gracias a la Vida'?,Mercedes Sosa,Charly García,Violeta Parra,3
-¿En qué año fue elegido presidente Néstor Kirchner?,2000,2003,2007,2
-¿En qué provincia se encuentra la ciudad de Ushuaia?,Santa Cruz,Chubut,Tierra del Fuego,3
-¿Qué moneda se utiliza en Argentina?,Dólar,Peso,Real,2
+pregunta,respuesta_1,respuesta_2,respuesta_3,respuesta_4,respuesta_correcta
+¿En qué ciudad nació Lionel Messi?,Rosario,Buenos Aires,Córdoba,Mendoza,1
+¿Cuál es la capital de Argentina?,Buenos Aires,Córdoba,Rosario,Chubut,1
+¿En qué año ganó Argentina su primer mundial de fútbol?,1978,1986,2002,1930,1
+¿Quién es conocido como el 'Padre de la Patria' en Argentina?,Juan Manuel de Rosas,José de San Martín,Manuel Belgrano,Julio Argentino Roca,2
+¿Cuál es el pico más alto de Argentina?,Cerro Aconcagua,Cerro Tronador,Cerro Fitz Roy,Cerro Piltriquitrón,1
+¿Qué río separa a Argentina de Uruguay?,Río Paraná,Río Colorado,Río de la Plata,Rio Negro,3
+¿Quién compuso la canción 'Gracias a la Vida'?,Mercedes Sosa,Charly García,Violeta Parra,Gustavo Ceratti,3
+¿En qué año fue elegido presidente Néstor Kirchner?,2000,2003,2007,2004,2
+¿En qué provincia se encuentra la ciudad de Ushuaia?,Santa Cruz,Chubut,Tierra del Fuego,Rio Negro,3
+¿Qué moneda se utiliza en Argentina?,Dólar,Peso,Real,Euro,2
