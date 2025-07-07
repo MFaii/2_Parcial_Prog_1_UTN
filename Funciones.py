@@ -257,3 +257,4 @@ def calcular_puntos(datos_juego: dict, es_correcta: bool) -> None:
         datos_juego["puntuacion"] += puntos
     else:
         datos_juego["puntuacion"] -= PUNTUACION_ERROR
+        datos_juego["vidas"] -= 1
