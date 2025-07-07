@@ -78,6 +78,10 @@ def mostrar_juego(
                     if aplicar_comodin("doble_chance", datos_juego, lista_preguntas):
                         CLICK_SONIDO.play()
 
+                elif BOTON_BOMBA.collidepoint(evento.pos):
+                    if aplicar_comodin("bomba", datos_juego, lista_preguntas):
+                        CLICK_SONIDO.play()
+
                 else:
                     respuesta = obtener_respuesta_click(lista_respuestas, evento.pos)
 
@@ -96,6 +100,7 @@ def mostrar_juego(
                             datos_juego["intento_extra"] = False
                             datos_juego["respuestas_ocultas"] = []
                             datos_juego["indice"] += 1
+                            datos_juego["respuestas_ocultadas_bomba"] = []
 
                         elif datos_juego.get(
                             "doble_chance_activada", False
@@ -141,16 +146,19 @@ def mostrar_juego(
     pantalla.blit(caja_pregunta["superficie"], caja_pregunta["rectangulo"])
 
     for i in range(len(lista_respuestas)):
-        pantalla.blit(
-            lista_respuestas[i]["superficie"], lista_respuestas[i]["rectangulo"]
-        )
-        mostrar_texto(
-            lista_respuestas[i]["superficie"],
-            pregunta_actual[f"respuesta_{i + 1}"],
-            (20, 20),
-            FUENTE_RESPUESTA,
-            COLOR_BLANCO,
-        )
+        if (i + 1) in datos_juego.get("respuestas_ocultadas_bomba", []):
+            continue
+        if (i + 1) not in datos_juego.get("respuestas_ocultas", []):
+            pantalla.blit(
+                lista_respuestas[i]["superficie"], lista_respuestas[i]["rectangulo"]
+            )
+            mostrar_texto(
+                lista_respuestas[i]["superficie"],
+                pregunta_actual[f"respuesta_{i + 1}"],
+                (20, 20),
+                FUENTE_RESPUESTA,
+                COLOR_BLANCO,
+            )
 
     mostrar_texto(
         caja_pregunta["superficie"],
@@ -183,6 +191,15 @@ def mostrar_juego(
         pantalla,
         "Doble chance",
         (BOTON_DOBLE_CHANCE.x + 10, BOTON_DOBLE_CHANCE.y + 10),
+        FUENTE_CAMBIO_PREGUNTA,
+        COLOR_BLANCO,
+    )
+
+    pygame.draw.rect(pantalla, (200, 0, 0), BOTON_BOMBA)
+    mostrar_texto(
+        pantalla,
+        "Bomba",
+        (BOTON_BOMBA.x + 40, BOTON_BOMBA.y + 10),
         FUENTE_CAMBIO_PREGUNTA,
         COLOR_BLANCO,
     )

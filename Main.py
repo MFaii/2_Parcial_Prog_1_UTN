@@ -31,6 +31,9 @@ datos_juego = {
     "doble_chance_activada": False,
     "intento_extra": False,
     "respuestas_ocultas": [],
+    # Bomba
+    "comodin_bomba_usado": False,
+    "respuestas_ocultadas_bomba": [],
 }
 corriendo = True
 reloj = pygame.time.Clock()

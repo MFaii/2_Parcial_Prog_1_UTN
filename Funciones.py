@@ -44,6 +44,8 @@ def reiniciar_estadisticas(datos_juego: dict) -> None:
     datos_juego["doble_chance_activada"] = False
     datos_juego["respuestas_ocultas"] = []
     datos_juego["intento_extra"] = False
+    datos_juego["comodin_bomba_usado"] = False
+    datos_juego["respuestas_ocultadas_bomba"] = []
 
 
 # GENERAL
@@ -224,6 +226,23 @@ def aplicar_comodin(comodin: str, datos_juego: dict, lista_preguntas: list) -> b
             datos_juego["doble_chance_activada"] = True
             datos_juego["doble_chance_usado"] = True
             datos_juego["respuestas_ocultas"] = []
+            return True
+
+    elif comodin == "bomba":
+        if not datos_juego.get("comodin_bomba_usado", False):
+            pregunta_actual = lista_preguntas[datos_juego["indice"]]
+            correcta = pregunta_actual["respuesta_correcta"]
+            todas = [1, 2, 3, 4]
+            incorrectas = [r for r in todas if r != correcta]
+
+            import random
+
+            visible_incorrecta = random.choice(incorrectas)
+
+            respuestas_a_ocultar = [r for r in incorrectas if r != visible_incorrecta]
+
+            datos_juego["respuestas_ocultadas_bomba"] = respuestas_a_ocultar
+            datos_juego["comodin_bomba_usado"] = True
             return True
 
     return False
