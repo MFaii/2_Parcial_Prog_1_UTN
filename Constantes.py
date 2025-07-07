@@ -46,4 +46,5 @@ CANTIDAD_TIEMPO = 30
 BOTON_GUARDAR = pygame.Rect(300, 350, 200, 50)
 BOTON_COMODIN = pygame.Rect(300, 350, 200, 50)
 BOTON_X2 = pygame.Rect(300, 550, 140, 40)
+BOTON_DOBLE_CHANCE = pygame.Rect(450, 500, 140, 40)
 FUENTE_RESPUESTA_CHICA = pygame.font.SysFont("Arial", 18)

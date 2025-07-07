@@ -74,20 +74,54 @@ def mostrar_juego(
                     if aplicar_comodin("x2", datos_juego, lista_preguntas):
                         CLICK_SONIDO.play()
 
+                elif BOTON_DOBLE_CHANCE.collidepoint(evento.pos):
+                    if aplicar_comodin("doble_chance", datos_juego, lista_preguntas):
+                        CLICK_SONIDO.play()
+
                 else:
                     respuesta = obtener_respuesta_click(lista_respuestas, evento.pos)
+
                     if respuesta is not None:
+                        if respuesta in datos_juego.get("respuestas_ocultas", []):
+                            continue
+
                         es_correcta = verificar_respuesta(
                             datos_juego, pregunta_actual, respuesta
                         )
-                        calcular_puntos(datos_juego, es_correcta)
 
                         if es_correcta:
+                            calcular_puntos(datos_juego, True)
                             CLICK_SONIDO.play()
-                        else:
+                            datos_juego["doble_chance_activada"] = False
+                            datos_juego["intento_extra"] = False
+                            datos_juego["respuestas_ocultas"] = []
+                            datos_juego["indice"] += 1
+
+                        elif datos_juego.get(
+                            "doble_chance_activada", False
+                        ) and not datos_juego.get("intento_extra", False):
+                            datos_juego["intento_extra"] = True
+                            datos_juego["respuestas_ocultas"].append(respuesta)
                             ERROR_SONIDO.play()
 
-                        datos_juego["indice"] += 1
+                        else:
+                            calcular_puntos(datos_juego, False)
+                            ERROR_SONIDO.play()
+                            datos_juego["doble_chance_activada"] = False
+                            datos_juego["intento_extra"] = False
+                            datos_juego["respuestas_ocultas"] = []
+                            datos_juego["indice"] += 1
+
+                        if datos_juego["indice"] == len(lista_preguntas):
+                            mezclar_lista(lista_preguntas)
+                            datos_juego["indice"] = 0
+
+                        pregunta_actual = cambiar_pregunta(
+                            lista_preguntas,
+                            datos_juego["indice"],
+                            caja_pregunta,
+                            lista_respuestas,
+                        )
                         if datos_juego["indice"] == len(lista_preguntas):
                             mezclar_lista(lista_preguntas)
                             datos_juego["indice"] = 0
@@ -140,6 +174,15 @@ def mostrar_juego(
         pantalla,
         "X2 puntos",
         (BOTON_X2.x + 10, BOTON_X2.y + 10),
+        FUENTE_CAMBIO_PREGUNTA,
+        COLOR_BLANCO,
+    )
+
+    pygame.draw.rect(pantalla, (0, 200, 100), BOTON_DOBLE_CHANCE)
+    mostrar_texto(
+        pantalla,
+        "Doble chance",
+        (BOTON_DOBLE_CHANCE.x + 10, BOTON_DOBLE_CHANCE.y + 10),
         FUENTE_CAMBIO_PREGUNTA,
         COLOR_BLANCO,
     )

@@ -21,9 +21,16 @@ datos_juego = {
     "volumen_musica": 5,
     "volumen_anterior": 50,
     # Comodines
+    # Pasar
     "comodin_pasar_usado": False,
+    # x2 puntos
     "comodin_doble_usado": False,
     "x2_activado": False,
+    # Doble chance
+    "comodin_doble_chance": False,
+    "doble_chance_activada": False,
+    "intento_extra": False,
+    "respuestas_ocultas": [],
 }
 corriendo = True
 reloj = pygame.time.Clock()

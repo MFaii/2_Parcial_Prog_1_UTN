@@ -40,6 +40,10 @@ def reiniciar_estadisticas(datos_juego: dict) -> None:
     datos_juego["comodin_pasar_usado"] = False
     datos_juego["comodin_doble_usado"] = False
     datos_juego["x2_activado"] = False
+    datos_juego["comodin_doble_chance"] = False
+    datos_juego["doble_chance_activada"] = False
+    datos_juego["respuestas_ocultas"] = []
+    datos_juego["intento_extra"] = False
 
 
 # GENERAL
@@ -214,6 +218,14 @@ def aplicar_comodin(comodin: str, datos_juego: dict, lista_preguntas: list) -> b
             datos_juego["x2_activado"] = True
             datos_juego["comodin_doble_usado"] = True
             return True
+
+    elif comodin == "doble_chance":
+        if not datos_juego.get("doble_chance_usado", False):
+            datos_juego["doble_chance_activada"] = True
+            datos_juego["doble_chance_usado"] = True
+            datos_juego["respuestas_ocultas"] = []
+            return True
+
     return False
 
 
