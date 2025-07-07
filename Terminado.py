@@ -8,8 +8,9 @@ from Validaciones import *
 
 pygame.init()
 cuadro_texto = crear_elemento_juego(
-    "./imgs/textura_respuesta.jpg", ANCHO_CUADRO, ALTO_CUADRO, 200, 200
+    "./imgs/neon_2.png", ANCHO_CUADRO, ALTO_CUADRO, 200, 200
 )
+imagen_boton_guardar = crear_boton_con_imagen("./imgs/neon_1.png", BOTON_GUARDAR)
 
 
 def mostrar_fin_juego(
@@ -55,9 +56,7 @@ def mostrar_fin_juego(
 
     # TODO:Metanle un fondo de pantalla al game over
 
-    fondo_pantalla = pygame.transform.scale(
-        pygame.image.load("./imgs/fondo.jpg"), PANTALLA
-    )
+    fondo_pantalla = pygame.transform.scale(pygame.image.load("./imgs/3.png"), PANTALLA)
     pantalla.blit(fondo_pantalla, (0, 0))
 
     # pantalla.fill(COLOR_BLANCO)
@@ -67,13 +66,11 @@ def mostrar_fin_juego(
         f"Usted obtuvo: {datos_juego["puntuacion"]} puntos",
         (250, 100),
         FUENTE_TEXTO,
-        COLOR_NEGRO,
+        COLOR_BLANCO,
     )
 
     if datos_juego["nombre"] != "":
-        limpiar_superficie(
-            cuadro_texto, "./imgs/textura_respuesta.jpg", ANCHO_CUADRO, ALTO_CUADRO
-        )
+        limpiar_superficie(cuadro_texto, "./imgs/neon_2.png", ANCHO_CUADRO, ALTO_CUADRO)
         mostrar_texto(
             cuadro_texto["superficie"],
             f"{datos_juego["nombre"]}",
@@ -100,7 +97,7 @@ def mostrar_fin_juego(
             "#736767",
         )
 
-    pygame.draw.rect(pantalla, (0, 200, 0), BOTON_GUARDAR)
+    pantalla.blit(imagen_boton_guardar, (BOTON_GUARDAR.x, BOTON_GUARDAR.y))
     mostrar_texto(
         pantalla,
         "Guardar partida",

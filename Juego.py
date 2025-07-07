@@ -10,7 +10,7 @@ icono = pygame.image.load("./imgs/icono.png")
 pygame.display.set_icon(icono)
 
 pantalla = pygame.display.set_mode(PANTALLA)
-fondo_pantalla = pygame.transform.scale(pygame.image.load("./imgs/fondo.jpg"), PANTALLA)
+fondo_pantalla = pygame.transform.scale(pygame.image.load("./imgs/3.png"), PANTALLA)
 
 # -------------------------
 # CENTRADO Y SETUP INICIAL
@@ -20,7 +20,7 @@ lista_preguntas = cargar_preguntas_csv()
 mezclar_lista(lista_preguntas)
 
 caja_pregunta = crear_elemento_juego(
-    "./imgs/textura_pregunta.jpg",
+    "./imgs/neon_1.png",
     ANCHO_PREGUNTA,
     ALTO_PREGUNTA,
     (600 - ANCHO_PREGUNTA) // 2,  # Centrado horizontal
@@ -28,7 +28,7 @@ caja_pregunta = crear_elemento_juego(
 )
 
 lista_respuestas = crear_respuestas(
-    "./imgs/textura_respuesta.jpg",
+    "./imgs/neon_2.png",
     ANCHO_BOTON,
     ALTO_BOTON,
     (600 - ANCHO_BOTON) // 2,  # Centrado horizontal
@@ -36,7 +36,6 @@ lista_respuestas = crear_respuestas(
     4,  # Cantidad de respuestas
 )
 
-BOTON_COMODIN = pygame.Rect(450, 550, 140, 40)  # Esquina inferior derecha
 
 evento_tiempo = pygame.USEREVENT
 pygame.time.set_timer(evento_tiempo, 1000)
@@ -165,7 +164,7 @@ def mostrar_juego(
         pregunta_actual["pregunta"],
         (20, 20),
         FUENTE_PREGUNTA,
-        COLOR_NEGRO,
+        COLOR_BLANCO,
     )
 
     pygame.draw.rect(pantalla, (50, 150, 255), BOTON_COMODIN)
@@ -211,5 +210,6 @@ def mostrar_juego(
     mostrar_texto(
         pantalla, f"TIEMPO: {datos_juego['tiempo_restante']} s", (300, 10), FUENTE_TEXTO
     )
+    mostrar_texto(pantalla, "COMODINES", (440, 350), FUENTE_TEXTO, COLOR_BLANCO)
 
     return retorno
