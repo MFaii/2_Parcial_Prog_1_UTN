@@ -203,12 +203,22 @@ def mostrar_juego(
         COLOR_BLANCO,
     )
 
-    mostrar_texto(pantalla, f"VIDAS: {datos_juego['vidas']}", (10, 10), FUENTE_TEXTO)
     mostrar_texto(
-        pantalla, f"PUNTUACION: {datos_juego['puntuacion']}", (10, 40), FUENTE_TEXTO
+        pantalla, f"VIDAS: {datos_juego['vidas']}", (10, 10), FUENTE_TEXTO, COLOR_BLANCO
     )
     mostrar_texto(
-        pantalla, f"TIEMPO: {datos_juego['tiempo_restante']} s", (300, 10), FUENTE_TEXTO
+        pantalla,
+        f"PUNTUACION: {datos_juego['puntuacion']}",
+        (10, 40),
+        FUENTE_TEXTO,
+        COLOR_BLANCO,
+    )
+    mostrar_texto(
+        pantalla,
+        f"TIEMPO: {datos_juego['tiempo_restante']} s",
+        (300, 10),
+        FUENTE_TEXTO,
+        COLOR_BLANCO,
     )
     mostrar_texto(pantalla, "COMODINES", (440, 350), FUENTE_TEXTO, COLOR_BLANCO)
 
