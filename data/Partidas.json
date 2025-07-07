@@ -73,5 +73,10 @@
         "nombre": "aaa",
         "fecha": "2025-07-05 17:31:36",
         "puntuacion": 975
+    },
+    {
+        "nombre": "Maximiliano",
+        "fecha": "2025-07-07 03:42:13",
+        "puntuacion": 275
     }
 ]

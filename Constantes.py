@@ -35,6 +35,8 @@ FUENTE_TEXTO = pygame.font.SysFont("Arial", 25, True)
 FUENTE_VOLUMEN = pygame.font.SysFont("Arial", 50, True)
 FUENTE_CUADRO_TEXTO = pygame.font.SysFont("Arial", 40, True)
 FUENTE_CAMBIO_PREGUNTA = pygame.font.SysFont("Arial", 18)
+FUENTE_RANKING_TITULO = pygame.font.SysFont("Arial", 30, True)
+FUENTE_RANKING_JUGADOR = pygame.font.SysFont("Arial", 15, True)
 
 BOTON_JUGAR = 0
 

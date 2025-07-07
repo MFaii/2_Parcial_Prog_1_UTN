@@ -4,7 +4,7 @@ from Funciones import *
 
 pygame.init()
 
-boton_volver = crear_elemento_juego("./imgs/textura_respuesta.jpg", 100, 40, 10, 10)
+boton_volver = crear_elemento_juego("./imgs/neon_1.png", 100, 40, 10, 10)
 
 
 def mostrar_rankings(
@@ -25,12 +25,14 @@ def mostrar_rankings(
 
     # pantalla.fill(COLOR_BLANCO)
     fondo_pantalla = pygame.transform.scale(
-        pygame.image.load("./imgs/fondo.jpg"), PANTALLA
+        pygame.image.load("./imgs/ranking_fondo.png"), PANTALLA
     )
     pantalla.blit(fondo_pantalla, (0, 0))
 
     pantalla.blit(boton_volver["superficie"], boton_volver["rectangulo"])
-    mostrar_texto(pantalla, f"TOP 10 JUGADORES", (150, 20), FUENTE_VOLUMEN, COLOR_NEGRO)
+    mostrar_texto(
+        pantalla, f"TOP 10 JUGADORES", (150, 80), FUENTE_RANKING_TITULO, COLOR_BLANCO
+    )
 
     i = 0
     while i < len(lista_rankings):
@@ -47,7 +49,7 @@ def mostrar_rankings(
         )
 
         mostrar_texto(
-            pantalla, texto, (100, 160 + i * 30), FUENTE_RESPUESTA, COLOR_NEGRO
+            pantalla, texto, (110, 160 + i * 30), FUENTE_RANKING_JUGADOR, COLOR_BLANCO
         )
 
         i += 1

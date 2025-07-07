@@ -90,11 +90,11 @@ def cambiar_pregunta(
 ) -> dict:
     pregunta_actual = lista_preguntas[indice]
     limpiar_superficie(
-        caja_pregunta, "./imgs/textura_pregunta.jpg", ANCHO_PREGUNTA, ALTO_PREGUNTA
+        caja_pregunta, "./imgs/neon_1.png", ANCHO_PREGUNTA, ALTO_PREGUNTA
     )
     for i in range(len(lista_respuestas)):
         limpiar_superficie(
-            lista_respuestas[i], "./imgs/textura_respuesta.jpg", ANCHO_BOTON, ALTO_BOTON
+            lista_respuestas[i], "./imgs/neon_2.png", ANCHO_BOTON, ALTO_BOTON
         )
 
     return pregunta_actual
@@ -110,7 +110,7 @@ def crear_botones_menu() -> list:
 
     for i in range(cantidad_botones):
         boton = crear_elemento_juego(
-            "./imgs/textura_respuesta.jpg", ANCHO_BOTON, ALTO_BOTON, pos_x, pos_y
+            "./imgs/neon_2.png", ANCHO_BOTON, ALTO_BOTON, pos_x, pos_y
         )
         lista_botones.append(boton)
         pos_y += ALTO_BOTON + espacio
@@ -151,9 +151,7 @@ def manejar_texto(
     # 2. Si se presiona la tecla borrar (backspace) y hay texto para borrar
     elif tecla_nombre == "backspace" and len(datos_juego["nombre"]) > 0:
         datos_juego["nombre"] = datos_juego["nombre"][:-1]
-        limpiar_superficie(
-            cuadro_texto, "./imgs/textura_respuesta.jpg", ANCHO_CUADRO, ALTO_CUADRO
-        )
+        limpiar_superficie(cuadro_texto, "./imgs/neon_2.png", ANCHO_CUADRO, ALTO_CUADRO)
 
     # 3. Si se presiona una letra, número o símbolo imprimible
     elif len(tecla_unicode) == 1 and tecla_unicode.isprintable():
@@ -258,3 +256,8 @@ def calcular_puntos(datos_juego: dict, es_correcta: bool) -> None:
     else:
         datos_juego["puntuacion"] -= PUNTUACION_ERROR
         datos_juego["vidas"] -= 1
+
+
+def crear_boton_con_imagen(path_imagen: str, rect: pygame.Rect) -> pygame.Surface:
+    imagen = pygame.image.load(path_imagen)
+    return pygame.transform.scale(imagen, (rect.width, rect.height))
