@@ -53,5 +53,25 @@
         "nombre": "Pasar comodin Test",
         "fecha": "2025-07-05 05:23:48",
         "puntuacion": 500
+    },
+    {
+        "nombre": "Esca",
+        "fecha": "2025-07-05 17:00:37",
+        "puntuacion": 375
+    },
+    {
+        "nombre": "Eska",
+        "fecha": "2025-07-05 17:04:44",
+        "puntuacion": 875
+    },
+    {
+        "nombre": "esca",
+        "fecha": "2025-07-05 17:21:55",
+        "puntuacion": 975
+    },
+    {
+        "nombre": "aaa",
+        "fecha": "2025-07-05 17:31:36",
+        "puntuacion": 975
     }
 ]

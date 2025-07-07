@@ -14,10 +14,26 @@ pantalla = pygame.display.set_mode(PANTALLA)
 datos_juego = {
     "puntuacion": 0,
     "vidas": CANTIDAD_VIDAS,
+    "aciertos_consecutivos": 0,
     "nombre": "",
     "tiempo_restante": CANTIDAD_TIEMPO,
     "indice": 0,
-    "volumen_musica": 0,
+    "volumen_musica": 5,
+    "volumen_anterior": 50,
+    # Comodines
+    # Pasar
+    "comodin_pasar_usado": False,
+    # x2 puntos
+    "comodin_doble_usado": False,
+    "x2_activado": False,
+    # Doble chance
+    "comodin_doble_chance": False,
+    "doble_chance_activada": False,
+    "intento_extra": False,
+    "respuestas_ocultas": [],
+    # Bomba
+    "comodin_bomba_usado": False,
+    "respuestas_ocultadas_bomba": [],
 }
 corriendo = True
 reloj = pygame.time.Clock()

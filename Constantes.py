@@ -8,8 +8,8 @@ COLOR_VERDE = (0, 255, 0)
 COLOR_ROJO = (255, 0, 0)
 COLOR_AZUL = (0, 0, 255)
 COLOR_VIOLETA = (134, 23, 219)
-ANCHO = 500
-ALTO = 500
+ANCHO = 600
+ALTO = 600
 PANTALLA = (ANCHO, ALTO)
 FPS = 30
 
@@ -34,6 +34,7 @@ FUENTE_RESPUESTA = pygame.font.SysFont("Arial", 20, True)
 FUENTE_TEXTO = pygame.font.SysFont("Arial", 25, True)
 FUENTE_VOLUMEN = pygame.font.SysFont("Arial", 50, True)
 FUENTE_CUADRO_TEXTO = pygame.font.SysFont("Arial", 40, True)
+FUENTE_CAMBIO_PREGUNTA = pygame.font.SysFont("Arial", 18)
 
 BOTON_JUGAR = 0
 
@@ -44,3 +45,7 @@ CANTIDAD_TIEMPO = 30
 
 BOTON_GUARDAR = pygame.Rect(300, 350, 200, 50)
 BOTON_COMODIN = pygame.Rect(300, 350, 200, 50)
+BOTON_X2 = pygame.Rect(300, 550, 140, 40)
+BOTON_DOBLE_CHANCE = pygame.Rect(450, 500, 140, 40)
+BOTON_BOMBA = pygame.Rect(30, 550, 140, 40)
+FUENTE_RESPUESTA_CHICA = pygame.font.SysFont("Arial", 18)

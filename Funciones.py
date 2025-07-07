@@ -37,19 +37,20 @@ def reiniciar_estadisticas(datos_juego: dict) -> None:
     datos_juego["vidas"] = CANTIDAD_VIDAS
     datos_juego["nombre"] = ""
     datos_juego["tiempo_restante"] = 30
+    datos_juego["comodin_pasar_usado"] = False
+    datos_juego["comodin_doble_usado"] = False
+    datos_juego["x2_activado"] = False
+    datos_juego["comodin_doble_chance"] = False
+    datos_juego["doble_chance_activada"] = False
+    datos_juego["respuestas_ocultas"] = []
+    datos_juego["intento_extra"] = False
+    datos_juego["comodin_bomba_usado"] = False
+    datos_juego["respuestas_ocultadas_bomba"] = []
 
 
 # GENERAL
 def verificar_respuesta(datos_juego: dict, pregunta: dict, respuesta: int) -> bool:
-    if respuesta == pregunta["respuesta_correcta"]:
-        datos_juego["puntuacion"] += PUNTUACION_ACIERTO
-        retorno = True
-    else:
-        datos_juego["vidas"] -= 1
-        datos_juego["puntuacion"] -= PUNTUACION_ERROR
-        retorno = False
-
-    return retorno
+    return respuesta == pregunta["respuesta_correcta"]
 
 
 def crear_elemento_juego(
@@ -101,14 +102,18 @@ def cambiar_pregunta(
 
 def crear_botones_menu() -> list:
     lista_botones = []
-    pos_y = 115
+    cantidad_botones = 4
+    espacio = 20
+    altura_total = cantidad_botones * ALTO_BOTON + (cantidad_botones - 1) * espacio
+    pos_y = (600 - altura_total) // 2
+    pos_x = (600 - ANCHO_BOTON) // 2
 
-    for i in range(4):
+    for i in range(cantidad_botones):
         boton = crear_elemento_juego(
-            "./imgs/textura_respuesta.jpg", ANCHO_BOTON, ALTO_BOTON, 125, pos_y
+            "./imgs/textura_respuesta.jpg", ANCHO_BOTON, ALTO_BOTON, pos_x, pos_y
         )
-        pos_y += 80
         lista_botones.append(boton)
+        pos_y += ALTO_BOTON + espacio
 
     return lista_botones
 
@@ -209,4 +214,46 @@ def aplicar_comodin(comodin: str, datos_juego: dict, lista_preguntas: list) -> b
                 datos_juego["indice"] = 0
             datos_juego["comodin_pasar_usado"] = True
             return True
+
+    elif comodin == "x2":
+        if not datos_juego.get("comodin_doble_usado", False):
+            datos_juego["x2_activado"] = True
+            datos_juego["comodin_doble_usado"] = True
+            return True
+
+    elif comodin == "doble_chance":
+        if not datos_juego.get("doble_chance_usado", False):
+            datos_juego["doble_chance_activada"] = True
+            datos_juego["doble_chance_usado"] = True
+            datos_juego["respuestas_ocultas"] = []
+            return True
+
+    elif comodin == "bomba":
+        if not datos_juego.get("comodin_bomba_usado", False):
+            pregunta_actual = lista_preguntas[datos_juego["indice"]]
+            correcta = pregunta_actual["respuesta_correcta"]
+            todas = [1, 2, 3, 4]
+            incorrectas = [r for r in todas if r != correcta]
+
+            import random
+
+            visible_incorrecta = random.choice(incorrectas)
+
+            respuestas_a_ocultar = [r for r in incorrectas if r != visible_incorrecta]
+
+            datos_juego["respuestas_ocultadas_bomba"] = respuestas_a_ocultar
+            datos_juego["comodin_bomba_usado"] = True
+            return True
+
     return False
+
+
+def calcular_puntos(datos_juego: dict, es_correcta: bool) -> None:
+    if es_correcta:
+        puntos = PUNTUACION_ACIERTO
+        if datos_juego.get("x2_activado", False):
+            puntos *= 2
+            datos_juego["x2_activado"] = False
+        datos_juego["puntuacion"] += puntos
+    else:
+        datos_juego["puntuacion"] -= PUNTUACION_ERROR

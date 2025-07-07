@@ -10,6 +10,7 @@ def cargar_preguntas_csv(ruta="data/Preguntas.csv") -> list:
                 "respuesta_1": fila["respuesta_1"],
                 "respuesta_2": fila["respuesta_2"],
                 "respuesta_3": fila["respuesta_3"],
+                "respuesta_4": fila["respuesta_4"],
                 "respuesta_correcta": int(fila["respuesta_correcta"])
             })
     return preguntas
