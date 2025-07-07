@@ -36,7 +36,6 @@ lista_respuestas = crear_respuestas(
     4,  # Cantidad de respuestas
 )
 
-BOTON_COMODIN = pygame.Rect(450, 550, 140, 40)  # Esquina inferior derecha
 
 evento_tiempo = pygame.USEREVENT
 pygame.time.set_timer(evento_tiempo, 1000)
@@ -211,5 +210,6 @@ def mostrar_juego(
     mostrar_texto(
         pantalla, f"TIEMPO: {datos_juego['tiempo_restante']} s", (300, 10), FUENTE_TEXTO
     )
+    mostrar_texto(pantalla, "COMODINES", (440, 350), FUENTE_TEXTO, COLOR_BLANCO)
 
     return retorno
