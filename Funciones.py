@@ -380,23 +380,35 @@ def aplicar_comodin(comodin: str, datos_juego: dict, lista_preguntas: list) -> b
     return False
 
 
-def calcular_puntos(datos_juego: dict, es_correcta: bool) -> None:
+def calcular_puntos(datos_juego: dict, acierto: bool):
     """
-    Calcula y actualiza la puntuación del jugador dependiendo de si respondió bien o mal.
+    Calcula y actualiza los puntos, vidas y tiempo del jugador según el resultado de la respuesta.
 
     Args:
-        datos_juego: Diccionario con los datos del juego.
-        es_correcta: True si la respuesta fue correcta, False si fue incorrecta.
+        datos_juego: Diccionario con el estado del juego.
+        acierto: True si la respuesta fue correcta, False si fue incorrecta.
     """
-    if es_correcta:
-        puntos = PUNTUACION_ACIERTO
-        if datos_juego.get("x2_activado", False):
-            puntos *= 2
-            datos_juego["x2_activado"] = False
+    multiplicador = 2 if datos_juego.get("x2_activado", False) else 1
+
+    if acierto:
+        puntos = PUNTUACION_ACIERTO * multiplicador
         datos_juego["puntuacion"] += puntos
+        datos_juego["aciertos_consecutivos"] += 1
+
+        if datos_juego["aciertos_consecutivos"] == 5:
+            datos_juego["vidas"] += 1
+            datos_juego["tiempo_restante"] += 5  # 👈 sumamos 5 segundos
+            datos_juego["aciertos_consecutivos"] = 0
+
     else:
-        datos_juego["puntuacion"] = max(0, datos_juego["puntuacion"] - PUNTUACION_ERROR)
-        datos_juego["vidas"] -= 1
+        datos_juego["puntuacion"] -= PUNTUACION_ERROR
+        datos_juego["puntuacion"] = max(0, datos_juego["puntuacion"])
+        datos_juego["vidas"] = max(0, datos_juego["vidas"] - 1)
+        datos_juego["aciertos_consecutivos"] = 0
+
+    datos_juego["x2_activado"] = False
+
+
 
 
 def crear_boton_con_imagen(path_imagen: str, rect: pygame.Rect) -> pygame.Surface:
