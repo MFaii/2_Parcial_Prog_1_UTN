@@ -44,7 +44,7 @@ Preguntados/
 ├── Validaciones.py           # Validación de datos (nombre)
 ├── main.py                   # Entrada principal del juego
 ├── sonidos/                  # Efectos de sonido
-│   └── click.wav, error.wav
+│   └── click.mp3, error.mp3
 └── README.md                 # Este archivo
 ```
 ## ▶️ Cómo ejecutar
