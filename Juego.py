@@ -46,7 +46,7 @@ pygame.time.set_timer(evento_tiempo, 1000)
 
 
 def mostrar_juego(
-        pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict
+    pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict
 ) -> str:
     """
     Muestra la pantalla principal del juego, procesa eventos y actualiza el estado del juego.
@@ -178,41 +178,45 @@ def mostrar_juego(
         COLOR_BLANCO,
     )
 
-    pygame.draw.rect(pantalla, (50, 150, 255), BOTON_COMODIN)
-    mostrar_texto(
-        pantalla,
-        "Pasar pregunta",
-        (BOTON_COMODIN.x + 10, BOTON_COMODIN.y + 10),
-        FUENTE_CAMBIO_PREGUNTA,
-        COLOR_BLANCO,
-    )
+    if not datos_juego.get("comodin_pasar_usado", True):
+        pygame.draw.rect(pantalla, (50, 150, 255), BOTON_COMODIN)
+        mostrar_texto(
+            pantalla,
+            "Pasar pregunta",
+            (BOTON_COMODIN.x + 10, BOTON_COMODIN.y + 10),
+            FUENTE_CAMBIO_PREGUNTA,
+            COLOR_BLANCO,
+        )
 
-    pygame.draw.rect(pantalla, (255, 165, 0), BOTON_X2)
-    mostrar_texto(
-        pantalla,
-        "X2 puntos",
-        (BOTON_X2.x + 10, BOTON_X2.y + 10),
-        FUENTE_CAMBIO_PREGUNTA,
-        COLOR_BLANCO,
-    )
+    if not datos_juego.get("comodin_doble_usado", True):
+        pygame.draw.rect(pantalla, (255, 165, 0), BOTON_X2)
+        mostrar_texto(
+            pantalla,
+            "X2 puntos",
+            (BOTON_X2.x + 10, BOTON_X2.y + 10),
+            FUENTE_CAMBIO_PREGUNTA,
+            COLOR_BLANCO,
+        )
 
-    pygame.draw.rect(pantalla, (0, 200, 100), BOTON_DOBLE_CHANCE)
-    mostrar_texto(
-        pantalla,
-        "Doble chance",
-        (BOTON_DOBLE_CHANCE.x + 10, BOTON_DOBLE_CHANCE.y + 10),
-        FUENTE_CAMBIO_PREGUNTA,
-        COLOR_BLANCO,
-    )
+    if not datos_juego.get("comodin_doble_chance_usado", True):
+        pygame.draw.rect(pantalla, (0, 200, 100), BOTON_DOBLE_CHANCE)
+        mostrar_texto(
+            pantalla,
+            "Doble chance",
+            (BOTON_DOBLE_CHANCE.x + 10, BOTON_DOBLE_CHANCE.y + 10),
+            FUENTE_CAMBIO_PREGUNTA,
+            COLOR_BLANCO,
+        )
 
-    pygame.draw.rect(pantalla, (200, 0, 0), BOTON_BOMBA)
-    mostrar_texto(
-        pantalla,
-        "Bomba",
-        (BOTON_BOMBA.x + 40, BOTON_BOMBA.y + 10),
-        FUENTE_CAMBIO_PREGUNTA,
-        COLOR_BLANCO,
-    )
+    if not datos_juego.get("comodin_bomba_usado", True):
+        pygame.draw.rect(pantalla, (200, 0, 0), BOTON_BOMBA)
+        mostrar_texto(
+            pantalla,
+            "Bomba",
+            (BOTON_BOMBA.x + 40, BOTON_BOMBA.y + 10),
+            FUENTE_CAMBIO_PREGUNTA,
+            COLOR_BLANCO,
+        )
 
     mostrar_texto(
         pantalla, f"VIDAS: {datos_juego['vidas']}", (10, 10), FUENTE_TEXTO, COLOR_BLANCO

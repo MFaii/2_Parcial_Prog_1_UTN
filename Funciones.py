@@ -356,7 +356,7 @@ def aplicar_comodin(comodin: str, datos_juego: dict, lista_preguntas: list) -> b
     elif comodin == "doble_chance":
         if not datos_juego.get("doble_chance_usado", False):
             datos_juego["doble_chance_activada"] = True
-            datos_juego["doble_chance_usado"] = True
+            datos_juego["comodin_doble_chance_usado"] = True
             datos_juego["respuestas_ocultas"] = []
             return True
 
@@ -407,8 +407,6 @@ def calcular_puntos(datos_juego: dict, acierto: bool):
         datos_juego["aciertos_consecutivos"] = 0
 
     datos_juego["x2_activado"] = False
-
-
 
 
 def crear_boton_con_imagen(path_imagen: str, rect: pygame.Rect) -> pygame.Surface:

@@ -78,5 +78,15 @@
         "nombre": "Maximiliano",
         "fecha": "2025-07-07 03:42:13",
         "puntuacion": 275
+    },
+    {
+        "nombre": "Leandro",
+        "fecha": "2025-07-08 16:59:13",
+        "puntuacion": 0
+    },
+    {
+        "nombre": "Lean",
+        "fecha": "2025-07-08 17:00:35",
+        "puntuacion": 450
     }
 ]
