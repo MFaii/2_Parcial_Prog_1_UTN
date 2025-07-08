@@ -27,6 +27,7 @@ ALTO_CUADRO = 50
 
 TAMAÑO_BOTON_VOLUMEN = (60, 60)
 TAMAÑO_BOTON_VOLVER = (100, 40)
+FUENTE_TIEMPO = pygame.font.SysFont("Arial", 60, bold=True)
 CLICK_SONIDO = pygame.mixer.Sound("./sounds/click.mp3")
 ERROR_SONIDO = pygame.mixer.Sound("./sounds/error.mp3")
 FUENTE_PREGUNTA = pygame.font.SysFont("Arial", 30, True)
