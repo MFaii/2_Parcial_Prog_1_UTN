@@ -45,7 +45,6 @@
         "puntuacion": 75
     },
     {
-<<<<<<< HEAD
         "nombre": "Lean",
         "fecha": "2025-07-08 17:00:35",
         "puntuacion": 450
@@ -69,14 +68,5 @@
         "nombre": "Esca",
         "fecha": "2025-07-08 17:41:44",
         "puntuacion": 175
-    },
-    {
-        "nombre": "GG",
-        "fecha": "2025-07-08 17:48:09",
-=======
-        "nombre": "Ezequiel",
-        "fecha": "2025-07-08 17:40:58",
->>>>>>> ccbd71ae13d1451eca300325ebc2a6afe0434fba
-        "puntuacion": 0
     }
 ]
