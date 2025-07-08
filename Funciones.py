@@ -58,7 +58,7 @@ def reiniciar_estadisticas(datos_juego: dict) -> None:
     datos_juego["puntuacion"] = 0
     datos_juego["vidas"] = CANTIDAD_VIDAS
     datos_juego["nombre"] = ""
-    datos_juego["tiempo_restante"] = 30
+    datos_juego["tiempo_restante"] = 45
     datos_juego["comodin_pasar_usado"] = False
     datos_juego["comodin_doble_usado"] = False
     datos_juego["x2_activado"] = False
