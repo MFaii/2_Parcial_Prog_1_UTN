@@ -50,7 +50,7 @@ Preguntados/
 ## ▶️ Cómo ejecutar
 ### 1. Cloná el repositorio:
 ```
-git clone https://github.com/MFaii/Preguntados-Pygame.git
+git clone https://github.com/MFaii/2_Parcial_Prog_1_UTN
 ```
 ### 2. Instalá las dependencias:
 ```
