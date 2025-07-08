@@ -11,6 +11,16 @@ fondo_menu = pygame.transform.scale(pygame.image.load("./imgs/3.png"), PANTALLA)
 def mostrar_menu(
     pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event]
 ) -> str:
+    """
+    Muestra la pantalla del menú principal del juego y gestiona la navegación según los clics del usuario.
+
+    Args:
+        pantalla: Superficie donde se dibuja el menú.
+        cola_eventos: Lista de eventos capturados por Pygame.
+
+    Returns:
+        str: Identificador de la siguiente pantalla a mostrar ("juego", "rankings", "ajustes", "salir" o "menu").
+    """
     retorno = "menu"
     # Gestionar Eventos
     for evento in cola_eventos:
