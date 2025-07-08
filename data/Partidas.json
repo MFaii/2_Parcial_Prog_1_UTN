@@ -1,90 +1,51 @@
 [
     {
-        "nombre": "maxi",
-        "fecha": "2025-07-03 03:49:07",
-        "puntuacion": 75
-    },
-    {
-        "nombre": "jose",
-        "fecha": "2025-07-03 03:49:31",
-        "puntuacion": 275
-    },
-    {
-        "nombre": "Maxi",
-        "fecha": "2025-07-03 04:05:45",
-        "puntuacion": 75
-    },
-    {
-        "nombre": "Maxi Test",
-        "fecha": "2025-07-04 21:57:46",
-        "puntuacion": 75
-    },
-    {
-        "nombre": "Maxi Test 2",
-        "fecha": "2025-07-04 22:00:25",
-        "puntuacion": 75
-    },
-    {
-        "nombre": "Test nombre valido 1",
-        "fecha": "2025-07-04 22:10:15",
-        "puntuacion": 275
-    },
-    {
-        "nombre": "Maxi Final",
-        "fecha": "2025-07-04 22:11:27",
-        "puntuacion": 375
-    },
-    {
-        "nombre": "Error fix",
-        "fecha": "2025-07-04 22:17:01",
-        "puntuacion": 75
-    },
-    {
-        "nombre": "Jose",
-        "fecha": "2025-07-05 01:12:55",
-        "puntuacion": 275
+        "nombre": "Maximiliano",
+        "fecha": "2025-07-08 17:32:31",
+        "puntuacion": 1075
     },
     {
         "nombre": "Ricardo",
-        "fecha": "2025-07-05 01:35:45",
-        "puntuacion": 275
+        "fecha": "2025-07-08 17:33:54",
+        "puntuacion": 475
     },
     {
-        "nombre": "Pasar comodin Test",
-        "fecha": "2025-07-05 05:23:48",
-        "puntuacion": 500
+        "nombre": "Jose",
+        "fecha": "2025-07-08 17:38:02",
+        "puntuacion": 1650
     },
     {
-        "nombre": "Esca",
-        "fecha": "2025-07-05 17:00:37",
-        "puntuacion": 375
+        "nombre": "Miguel",
+        "fecha": "2025-07-08 17:38:21",
+        "puntuacion": 75
     },
     {
-        "nombre": "Eska",
-        "fecha": "2025-07-05 17:04:44",
+        "nombre": "Julieta",
+        "fecha": "2025-07-08 17:38:43",
+        "puntuacion": 300
+    },
+    {
+        "nombre": "Mariano",
+        "fecha": "2025-07-08 17:39:33",
         "puntuacion": 875
     },
     {
-        "nombre": "esca",
-        "fecha": "2025-07-05 17:21:55",
-        "puntuacion": 975
+        "nombre": "Martin",
+        "fecha": "2025-07-08 17:40:13",
+        "puntuacion": 75
     },
     {
-        "nombre": "aaa",
-        "fecha": "2025-07-05 17:31:36",
-        "puntuacion": 975
-    },
-    {
-        "nombre": "Maximiliano",
-        "fecha": "2025-07-07 03:42:13",
+        "nombre": "Martina",
+        "fecha": "2025-07-08 17:40:26",
         "puntuacion": 275
     },
     {
-        "nombre": "Leandro",
-        "fecha": "2025-07-08 16:59:13",
-        "puntuacion": 0
+        "nombre": "Matias",
+        "fecha": "2025-07-08 17:40:45",
+        "puntuacion": 75
     },
     {
+<<<<<<< HEAD
         "nombre": "Lean",
         "fecha": "2025-07-08 17:00:35",
         "puntuacion": 450
@@ -112,6 +73,10 @@
     {
         "nombre": "GG",
         "fecha": "2025-07-08 17:48:09",
+=======
+        "nombre": "Ezequiel",
+        "fecha": "2025-07-08 17:40:58",
+>>>>>>> ccbd71ae13d1451eca300325ebc2a6afe0434fba
         "puntuacion": 0
     }
 ]
