@@ -5,14 +5,18 @@ from Funciones import *
 pygame.init()
 
 boton_volver = crear_elemento_juego("./imgs/neon_2.png", 120, 50, 10, 10)
-boton_suma = crear_elemento_juego("./imgs/mas.webp", 60, 60, 520, 530)  
-boton_resta = crear_elemento_juego("./imgs/menos.webp", 60, 60, 20, 530)  
-boton_mute = crear_elemento_juego("./imgs/neon_2.png", 150, 50, 225, 530)  
+boton_suma = crear_elemento_juego("./imgs/mas.webp", 60, 60, 520, 530)
+boton_resta = crear_elemento_juego("./imgs/menos.webp", 60, 60, 20, 530)
+boton_mute = crear_elemento_juego("./imgs/neon_2.png", 150, 50, 225, 530)
 
-fondo_config = pygame.transform.scale(pygame.image.load("./imgs/configuracion_fondo.jpg"), PANTALLA)
+fondo_config = pygame.transform.scale(
+    pygame.image.load("./imgs/configuracion_fondo.jpg"), PANTALLA
+)
 
 
-def mostrar_ajustes(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict) -> str:
+def mostrar_ajustes(
+    pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict
+) -> str:
     """
     Muestra la pantalla de ajustes y gestiona la interacción con sus botones.
 
@@ -51,14 +55,14 @@ def mostrar_ajustes(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Ev
                         datos_juego["volumen_anterior"] = datos_juego["volumen_musica"]
                         datos_juego["volumen_musica"] = 0
                     else:
-                        datos_juego["volumen_musica"] = datos_juego.get("volumen_anterior", 50)
+                        datos_juego["volumen_musica"] = datos_juego.get(
+                            "volumen_anterior", 50
+                        )
 
                     pygame.mixer.music.set_volume(datos_juego["volumen_musica"] / 100)
                     CLICK_SONIDO.play()
 
-
     pantalla.blit(fondo_config, (0, 0))
-
 
     pantalla.blit(boton_suma["superficie"], boton_suma["rectangulo"])
     pantalla.blit(boton_resta["superficie"], boton_resta["rectangulo"])
@@ -78,7 +82,7 @@ def mostrar_ajustes(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Ev
     mostrar_texto(
         boton_mute["superficie"],
         "MUTE",
-        (10, 5),
+        (47, 15),
         FUENTE_RESPUESTA,
         COLOR_BLANCO,
     )
