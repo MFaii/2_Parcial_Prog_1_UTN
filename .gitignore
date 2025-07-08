@@ -1,0 +1,17 @@
+# Ignorar caché de Python
+__pycache__/
+*.py[cod]
+
+# Entornos virtuales (opcional)
+venv/
+env/
+
+# Archivos de configuración o sistema
+*.log
+*.sqlite3
+.DS_Store
+Thumbs.db
+
+# Archivos de compilación o temporales
+*.egg-info/
+*.bak
