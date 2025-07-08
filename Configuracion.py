@@ -8,7 +8,7 @@ boton_suma = crear_elemento_juego("./imgs/mas.webp", 60, 60, 420, 200)
 boton_resta = crear_elemento_juego("./imgs/menos.webp", 60, 60, 20, 200)
 boton_volver = crear_elemento_juego("./imgs/textura_respuesta.jpg", 100, 40, 10, 10)
 boton_mute = crear_elemento_juego("./imgs/textura_respuesta.jpg", 100, 100, 200, 400)
-
+fondo_config = pygame.transform.scale(pygame.image.load("./imgs/configuracion_fondo.jpg"), PANTALLA)
 
 def mostrar_ajustes(
     pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict
@@ -46,7 +46,8 @@ def mostrar_ajustes(
                     CLICK_SONIDO.play()
 
 
-    pantalla.fill(COLOR_BLANCO)
+    pantalla.blit(fondo_config, (0, 0))
+
 
     pantalla.blit(boton_suma["superficie"], boton_suma["rectangulo"])
     pantalla.blit(boton_resta["superficie"], boton_resta["rectangulo"])
