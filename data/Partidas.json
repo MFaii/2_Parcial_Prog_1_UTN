@@ -88,5 +88,30 @@
         "nombre": "Lean",
         "fecha": "2025-07-08 17:00:35",
         "puntuacion": 450
+    },
+    {
+        "nombre": "Agustin",
+        "fecha": "2025-07-08 17:34:49",
+        "puntuacion": 1325
+    },
+    {
+        "nombre": "Agustin",
+        "fecha": "2025-07-08 17:40:59",
+        "puntuacion": 2450
+    },
+    {
+        "nombre": "Gusti",
+        "fecha": "2025-07-08 17:41:33",
+        "puntuacion": 275
+    },
+    {
+        "nombre": "Esca",
+        "fecha": "2025-07-08 17:41:44",
+        "puntuacion": 175
+    },
+    {
+        "nombre": "GG",
+        "fecha": "2025-07-08 17:48:09",
+        "puntuacion": 0
     }
 ]
