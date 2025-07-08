@@ -7,6 +7,16 @@ import os
 
 
 def mostrar_texto(surface, text, pos, font, color=pygame.Color("black")):
+    """
+    Muestra texto en una superficie con ajuste automático de línea.
+
+    Args:
+        surface: Superficie de Pygame donde se dibuja el texto.
+        text: Texto a mostrar.
+        pos: Tupla con la posición (x, y) donde empieza el texto.
+        font: Fuente utilizada para renderizar el texto.
+        color: Color del texto (por defecto negro).
+    """
     words = [
         word.split(" ") for word in text.splitlines()
     ]  # 2D array where each row is a list of words.
@@ -28,11 +38,23 @@ def mostrar_texto(surface, text, pos, font, color=pygame.Color("black")):
 
 # GENERAL
 def mezclar_lista(lista_preguntas: list) -> None:
+    """
+    Mezcla aleatoriamente la lista de preguntas.
+
+    Args:
+        lista_preguntas: Lista de preguntas a mezclar.
+    """
     random.shuffle(lista_preguntas)
 
 
 # GENERAL
 def reiniciar_estadisticas(datos_juego: dict) -> None:
+    """
+    Reinicia las estadísticas del juego a sus valores iniciales.
+
+    Args:
+        datos_juego: Diccionario con los datos del juego.
+    """
     datos_juego["puntuacion"] = 0
     datos_juego["vidas"] = CANTIDAD_VIDAS
     datos_juego["nombre"] = ""
@@ -50,12 +72,36 @@ def reiniciar_estadisticas(datos_juego: dict) -> None:
 
 # GENERAL
 def verificar_respuesta(datos_juego: dict, pregunta: dict, respuesta: int) -> bool:
+    """
+    Verifica si la respuesta del jugador es correcta.
+
+    Args:
+        datos_juego: Diccionario con los datos del juego.
+        pregunta: Diccionario con los datos de la pregunta.
+        respuesta: Respuesta seleccionada por el jugador (1 a 4).
+
+    Returns:
+        True si la respuesta es correcta, False en caso contrario.
+    """
     return respuesta == pregunta["respuesta_correcta"]
 
 
 def crear_elemento_juego(
     textura: str, ancho: int, alto: int, pos_x: int, pos_y: int
 ) -> dict:
+    """
+    Crea un elemento gráfico del juego con su textura y posición.
+
+    Args:
+        textura: Ruta de la imagen.
+        ancho: Ancho del elemento.
+        alto: Alto del elemento.
+        pos_x: Posición X.
+        pos_y: Posición Y.
+
+    Returns:
+        Diccionario con la superficie y el rectángulo del elemento.
+    """
     elemento_juego = {}
     elemento_juego["superficie"] = pygame.transform.scale(
         pygame.image.load(textura), (ancho, alto)
@@ -70,12 +116,31 @@ def crear_elemento_juego(
 def limpiar_superficie(
     elemento_juego: dict, textura: str, ancho: int, alto: int
 ) -> None:
+    """
+    Limpia y actualiza la textura del elemento gráfico.
+
+    Args:
+        elemento_juego: Elemento del juego a limpiar.
+        textura: Ruta de la nueva imagen.
+        ancho: Ancho de la imagen.
+        alto: Alto de la imagen.
+    """
     elemento_juego["superficie"] = pygame.transform.scale(
         pygame.image.load(textura), (ancho, alto)
     )
 
 
 def obtener_respuesta_click(lista_respuestas: list, pos_click: tuple):
+    """
+    Devuelve la opción seleccionada según la posición del click.
+
+    Args:
+        lista_respuestas: Lista de botones de respuesta.
+        pos_click: Tupla con la posición del click.
+
+    Returns:
+        Número de la respuesta seleccionada (1 a 4), o None.
+    """
     respuesta = None
 
     for i in range(len(lista_respuestas)):
@@ -88,6 +153,18 @@ def obtener_respuesta_click(lista_respuestas: list, pos_click: tuple):
 def cambiar_pregunta(
     lista_preguntas: list, indice: int, caja_pregunta: dict, lista_respuestas: list
 ) -> dict:
+    """
+    Cambia la pregunta actual limpiando las superficies y devolviendo la nueva pregunta.
+
+    Args:
+        lista_preguntas: Lista de preguntas.
+        indice: Índice de la nueva pregunta.
+        caja_pregunta: Diccionario con la caja donde se muestra la pregunta.
+        lista_respuestas: Lista de botones de respuesta.
+
+    Returns:
+        Diccionario con los datos de la nueva pregunta.
+    """
     pregunta_actual = lista_preguntas[indice]
     limpiar_superficie(
         caja_pregunta, "./imgs/neon_1.png", ANCHO_PREGUNTA, ALTO_PREGUNTA
@@ -101,6 +178,12 @@ def cambiar_pregunta(
 
 
 def crear_botones_menu() -> list:
+    """
+    Crea y devuelve los botones del menú principal.
+
+    Returns:
+        Lista de diccionarios, cada uno representando un botón.
+    """
     lista_botones = []
     cantidad_botones = 4
     espacio = 20
@@ -126,6 +209,20 @@ def crear_respuestas(
     pos_y: int,
     cantidad_respuestas: int,
 ) -> list:
+    """
+    Crea los botones de respuesta para una pregunta.
+
+    Args:
+        textura: Ruta de la imagen de los botones.
+        ancho: Ancho de los botones.
+        alto: Alto de los botones.
+        pos_x: Posición X inicial.
+        pos_y: Posición Y inicial.
+        cantidad_respuestas: Cantidad de respuestas a crear.
+
+    Returns:
+        Lista de diccionarios representando los botones de respuesta.
+    """
     lista_respuestas = []
 
     for i in range(cantidad_respuestas):
@@ -143,6 +240,16 @@ def manejar_texto(
     bloc_mayus: int,
     datos_juego: dict,
 ) -> None:
+    """
+    Maneja la entrada de texto del jugador para escribir su nombre.
+
+    Args:
+        cuadro_texto: Cuadro de texto a limpiar si se borra.
+        tecla_nombre: Nombre de la tecla presionada.
+        tecla_unicode: Carácter correspondiente a la tecla.
+        bloc_mayus: Estado de mayúsculas (SHIFT o CAPS).
+        datos_juego: Diccionario donde se almacena el nombre.
+    """
     # 1. Si se presiona la barra espaciadora
     if tecla_nombre == "space":
         CLICK_SONIDO.play()
@@ -167,6 +274,13 @@ def manejar_texto(
 def guardar_datos_jugador(
     datos_juego: dict, archivo: str = "./data/Partidas.json"
 ) -> None:
+    """
+    Guarda los datos del jugador actual en un archivo JSON.
+
+    Args:
+        datos_juego: Diccionario con los datos del jugador.
+        archivo: Ruta del archivo JSON donde se guardarán los datos.
+    """
     guardar_datos = {
         "nombre": datos_juego["nombre"],
         "fecha": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -190,6 +304,15 @@ def guardar_datos_jugador(
 
 
 def cargar_top_jugadores(archivo="./data/Partidas.json") -> list:
+    """
+    Carga las 10 mejores partidas desde un archivo JSON ordenadas por puntuación.
+
+    Args:
+        archivo: Ruta del archivo JSON de donde leer los datos.
+
+    Returns:
+        Lista con los 10 mejores puntajes.
+    """
     if not os.path.exists(archivo):
         return []
 
@@ -204,6 +327,17 @@ def cargar_top_jugadores(archivo="./data/Partidas.json") -> list:
 
 
 def aplicar_comodin(comodin: str, datos_juego: dict, lista_preguntas: list) -> bool:
+    """
+    Aplica el efecto del comodín indicado si aún no fue usado.
+
+    Args:
+        comodin: Nombre del comodín a aplicar.
+        datos_juego: Diccionario con los datos del juego.
+        lista_preguntas: Lista de preguntas.
+
+    Returns:
+        True si el comodín se aplicó correctamente, False si ya fue usado.
+    """
     if comodin == "pasar":
         if not datos_juego.get("comodin_pasar_usado", False):
             datos_juego["indice"] += 1
@@ -246,18 +380,47 @@ def aplicar_comodin(comodin: str, datos_juego: dict, lista_preguntas: list) -> b
     return False
 
 
-def calcular_puntos(datos_juego: dict, es_correcta: bool) -> None:
-    if es_correcta:
-        puntos = PUNTUACION_ACIERTO
-        if datos_juego.get("x2_activado", False):
-            puntos *= 2
-            datos_juego["x2_activado"] = False
+def calcular_puntos(datos_juego: dict, acierto: bool):
+    """
+    Calcula y actualiza los puntos, vidas y tiempo del jugador según el resultado de la respuesta.
+
+    Args:
+        datos_juego: Diccionario con el estado del juego.
+        acierto: True si la respuesta fue correcta, False si fue incorrecta.
+    """
+    multiplicador = 2 if datos_juego.get("x2_activado", False) else 1
+
+    if acierto:
+        puntos = PUNTUACION_ACIERTO * multiplicador
         datos_juego["puntuacion"] += puntos
+        datos_juego["aciertos_consecutivos"] += 1
+
+        if datos_juego["aciertos_consecutivos"] == 5:
+            datos_juego["vidas"] += 1
+            datos_juego["tiempo_restante"] += 5  # 👈 sumamos 5 segundos
+            datos_juego["aciertos_consecutivos"] = 0
+
     else:
-        datos_juego["puntuacion"] = max(0, datos_juego["puntuacion"] - PUNTUACION_ERROR)
-        datos_juego["vidas"] -= 1
+        datos_juego["puntuacion"] -= PUNTUACION_ERROR
+        datos_juego["puntuacion"] = max(0, datos_juego["puntuacion"])
+        datos_juego["vidas"] = max(0, datos_juego["vidas"] - 1)
+        datos_juego["aciertos_consecutivos"] = 0
+
+    datos_juego["x2_activado"] = False
+
+
 
 
 def crear_boton_con_imagen(path_imagen: str, rect: pygame.Rect) -> pygame.Surface:
+    """
+    Crea un botón a partir de una imagen escalada a un rectángulo dado.
+
+    Args:
+        path_imagen (str): Ruta del archivo de imagen a usar como textura del botón.
+        rect (pygame.Rect): Objeto Rect que define el tamaño deseado del botón.
+
+    Returns:
+        pygame.Surface: Superficie de Pygame con la imagen escalada al tamaño especificado.
+    """
     imagen = pygame.image.load(path_imagen)
     return pygame.transform.scale(imagen, (rect.width, rect.height))

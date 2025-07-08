@@ -10,9 +10,18 @@ boton_volver = crear_elemento_juego("./imgs/textura_respuesta.jpg", 100, 40, 10,
 boton_mute = crear_elemento_juego("./imgs/textura_respuesta.jpg", 100, 100, 200, 400)
 
 
-def mostrar_ajustes(
-    pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict
-) -> str:
+def mostrar_ajustes(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict) -> str:
+    """
+    Muestra la pantalla de ajustes y gestiona la interacción con sus botones.
+
+    Args:
+        pantalla: Superficie donde se dibujan los elementos de ajustes.
+        cola_eventos: Lista de eventos de Pygame.
+        datos_juego: Diccionario con los datos del juego (incluye volumen).
+
+    Returns:
+        str: Nombre de la siguiente pantalla a mostrar ("ajustes", "menu" o "salir").
+    """
     retorno = "ajustes"
 
     for evento in cola_eventos:
@@ -72,6 +81,5 @@ def mostrar_ajustes(
         FUENTE_RESPUESTA,
         COLOR_BLANCO,
     )
-
 
     return retorno

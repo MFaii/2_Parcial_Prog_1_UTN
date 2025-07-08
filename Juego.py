@@ -46,8 +46,19 @@ pygame.time.set_timer(evento_tiempo, 1000)
 
 
 def mostrar_juego(
-    pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict
+        pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict
 ) -> str:
+    """
+    Muestra la pantalla principal del juego, procesa eventos y actualiza el estado del juego.
+
+    Args:
+        pantalla: Superficie principal del juego.
+        cola_eventos: Lista de eventos Pygame.
+        datos_juego: Diccionario con el estado actual del juego.
+
+    Returns:
+        str: Nombre del estado siguiente ("juego", "terminado" o "salir").
+    """
     retorno = "juego"
     pregunta_actual = lista_preguntas[datos_juego["indice"]]
 
