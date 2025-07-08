@@ -54,8 +54,7 @@ while corriendo:
             pygame.mixer.music.stop()
             bandera_musica = False
         reiniciar_estadisticas(datos_juego)
-        # SOLO SI HACEMOS QUE SE REINICIE SOLO
-        # ya_guardado["guardado"] = False
+
         ventana_actual = mostrar_menu(pantalla, cola_eventos)
     elif ventana_actual == "juego":
         porcentaje_volumen = datos_juego["volumen_musica"] / 100
