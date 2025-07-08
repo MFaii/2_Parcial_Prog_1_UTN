@@ -4,10 +4,12 @@ from Funciones import *
 
 pygame.init()
 
-boton_suma = crear_elemento_juego("./imgs/mas.webp", 60, 60, 420, 200)
-boton_resta = crear_elemento_juego("./imgs/menos.webp", 60, 60, 20, 200)
-boton_volver = crear_elemento_juego("./imgs/textura_respuesta.jpg", 100, 40, 10, 10)
-boton_mute = crear_elemento_juego("./imgs/textura_respuesta.jpg", 100, 100, 200, 400)
+boton_volver = crear_elemento_juego("./imgs/neon_2.png", 120, 50, 10, 10)
+boton_suma = crear_elemento_juego("./imgs/mas.webp", 60, 60, 520, 530)  
+boton_resta = crear_elemento_juego("./imgs/menos.webp", 60, 60, 20, 530)  
+boton_mute = crear_elemento_juego("./imgs/neon_2.png", 150, 50, 225, 530)  
+
+fondo_config = pygame.transform.scale(pygame.image.load("./imgs/configuracion_fondo.jpg"), PANTALLA)
 
 
 def mostrar_ajustes(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Event], datos_juego: dict) -> str:
@@ -55,28 +57,27 @@ def mostrar_ajustes(pantalla: pygame.Surface, cola_eventos: list[pygame.event.Ev
                     CLICK_SONIDO.play()
 
 
-    pantalla.fill(COLOR_BLANCO)
+    pantalla.blit(fondo_config, (0, 0))
+
 
     pantalla.blit(boton_suma["superficie"], boton_suma["rectangulo"])
     pantalla.blit(boton_resta["superficie"], boton_resta["rectangulo"])
     pantalla.blit(boton_volver["superficie"], boton_volver["rectangulo"])
     pantalla.blit(boton_mute["superficie"], boton_mute["rectangulo"])
 
-
     mostrar_texto(
         pantalla,
         f"{datos_juego["volumen_musica"]} %",
-        (200, 200),
+        (230, 250),
         FUENTE_VOLUMEN,
-        COLOR_NEGRO,
+        COLOR_BLANCO,
     )
     mostrar_texto(
         boton_volver["superficie"], "VOLVER", (5, 5), FUENTE_RESPUESTA, COLOR_BLANCO
     )
-    texto_mute = "DESMUTEAR" if datos_juego["volumen_musica"] == 0 else "MUTE"
     mostrar_texto(
         boton_mute["superficie"],
-        texto_mute,
+        "MUTE",
         (10, 5),
         FUENTE_RESPUESTA,
         COLOR_BLANCO,

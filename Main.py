@@ -18,6 +18,7 @@ datos_juego = {
     "nombre": "",
     "tiempo_restante": CANTIDAD_TIEMPO,
     "indice": 0,
+    "musica_muted": False,
     "volumen_musica": 5,
     "volumen_anterior": 50,
     # Comodines
