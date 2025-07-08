@@ -11,6 +11,9 @@ pygame.display.set_icon(icono)
 
 pantalla = pygame.display.set_mode(PANTALLA)
 fondo_pantalla = pygame.transform.scale(pygame.image.load("./imgs/3.png"), PANTALLA)
+corazon_img = pygame.image.load("./imgs/corazon.png")
+corazon_img = pygame.transform.scale(corazon_img, (30, 30))  # Ajusta tamaño a tu gusto
+
 
 # -------------------------
 # CENTRADO Y SETUP INICIAL
@@ -218,9 +221,9 @@ def mostrar_juego(
             COLOR_BLANCO,
         )
 
-    mostrar_texto(
-        pantalla, f"VIDAS: {datos_juego['vidas']}", (10, 10), FUENTE_TEXTO, COLOR_BLANCO
-    )
+    for i in range(datos_juego["vidas"]):
+        pantalla.blit(corazon_img, (10 + i * 35, 10))
+
     mostrar_texto(
         pantalla,
         f"PUNTUACION: {datos_juego['puntuacion']}",
@@ -229,12 +232,12 @@ def mostrar_juego(
         COLOR_BLANCO,
     )
     mostrar_texto(
-        pantalla,
-        f"TIEMPO: {datos_juego['tiempo_restante']} s",
-        (300, 10),
-        FUENTE_TEXTO,
-        COLOR_BLANCO,
-    )
+    pantalla,
+    f"{datos_juego['tiempo_restante']}",
+    (PANTALLA[0] - 100, 10),
+    FUENTE_TIEMPO,
+    COLOR_BLANCO,
+)
     mostrar_texto(pantalla, "COMODINES", (440, 350), FUENTE_TEXTO, COLOR_BLANCO)
 
     return retorno
